@@ -67,7 +67,7 @@ gem "aws-sdk-s3", require: false
 
 gem "devise", "~> 4.9"
 
-gem "aws-sdk-lambda", "~> 1.25"
+gem "aws-sdk-lambda", "~> 1.131"
 
 gem "pg_search"
 
