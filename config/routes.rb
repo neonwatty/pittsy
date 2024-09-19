@@ -14,22 +14,6 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  # Define root path
-  root "home#index"
-
-  # Route for 'home' page
-  get "home", to: "home#index", as: "home"
-
-  # Search route
-  get "search", to: "equipments#search"
-
-  # Resources for 'equipments' with custom collection route
-  resources :equipments, except: [ :update, :edit ] do
-    collection do
-      post "search_items"
-    end
-  end
-
   # Catch-all route for non-existent pages, to be used unless assets are being compiled
   match "*path", via: :all, to: "application#not_found", constraints: lambda { |req|
     req.path.exclude? "rails/active_storage"

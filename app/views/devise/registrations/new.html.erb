@@ -19,6 +19,10 @@
         <%= f.label :password_confirmation %><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: "user-profile-input-field", id: "new-user-password-confirm-field" %>
       </div>
+      <div>
+        <%= f.label :role %><br />
+        <%= f.select :role, options_for_select([['Admin', 'admin'], ['Employee', 'employee']], 'employee') %>
+      </div>
       <div class="actions pt-4 pb-4">
         <%= f.submit "Sign up", class: "btn btn-primary btn-md", id: "signup-registration-btn" %>
       </div>

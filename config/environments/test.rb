@@ -33,7 +33,7 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
 
   # Store equipmented files on the local file system in a temporary directory.
-  config.active_storage.service = :amazon
+  config.active_storage.service = :local
 
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true

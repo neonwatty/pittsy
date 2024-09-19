@@ -1,7 +1,0 @@
-one:
-  upload: one
-  result: MyString
-
-two:
-  upload: two
-  result: MyString

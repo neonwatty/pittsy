@@ -3,6 +3,18 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   rate_limit to: 10, within: 5.minutes, only: [ :create ], with: -> { redirect_to root_path, alert: "Too many registration attempts. Please try again" }
 
+  before_action :authorize_admin, only: [ :new, :create ]
+
+  protected
+
+  def sign_up_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :role)
+  end
+
+  def authorize_admin
+    redirect_to root_path, alert: "Access denied!" unless current_user&.admin?
+  end
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
