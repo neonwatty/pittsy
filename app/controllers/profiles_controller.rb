@@ -24,6 +24,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
+      puts "profile_params: #{profile_params}"
       redirect_to user_profile_path(@user, @profile), notice: "Profile was successfully updated."
     else
       render :edit
@@ -46,7 +47,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:status, :role, :notes, :first_name, :last_name)
+    params.require(:profile).permit(:status, :role, :notes, :first_name, :last_name, :avatar)
   end
 
   def authorize_admin

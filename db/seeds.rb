@@ -20,7 +20,7 @@ profile.update!(
   first_name: "Robert",
   last_name: "Watt",
   role: "admin",
-  status: 0,
+  status: "active",
   notes: "Rob is a great admin.",
   avatar: Rails.root.join("app/assets/images/avatars/avatar_1.png").open
 )
@@ -36,7 +36,7 @@ profile.update!(
  first_name: "Ben",
  last_name: "Schmidtetter",
  role: "employee",
- status: 1,
+ status: "inactive",
  notes: "Ben is a great employee.",
  avatar: Rails.root.join("app/assets/images/avatars/avatar_2.png").open
 )
@@ -52,7 +52,7 @@ profile.update!(
   role: "employee",
   first_name: "Josh",
   last_name: "Schmidtetter",
-  status: 0,
+  status: "active",
   notes: "Josh is a great employee.",
   avatar: Rails.root.join("app/assets/images/avatars/avatar_3.png").open
 )
@@ -68,7 +68,7 @@ profile.update!(
   role: "employee",
   first_name: "Bob",
   last_name: "Androsik",
-  status: 1,
+  status: "active",
   notes: "Bob is a great employee.",
   avatar: Rails.root.join("app/assets/images/avatars/avatar_4.png").open
 )

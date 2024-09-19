@@ -1,29 +1,30 @@
 <div class="navbar bg-base-100" id="navbar">
   <%= link_to 'pittsy', root_path, class: 'btn btn-ghost text-xl' %>
-  <div class="flex-none">
-    <ul class="menu menu-horizontal px-1">
-      <li>
-        <%= link_to 'Home', root_path, class: "link link-hover"%>
-      </li>
-      <% if user_signed_in? %>
-        <% if current_user&.profile&.admin? %>
-          <li>
-            <%= link_to "User", edit_user_registration_path %>
-          </li>
-          <li>
-            <%= link_to "Profiles", users_path %>
-          </li>
-        <% end %>
+<div class="flex-none">
+  <ul class="menu menu-horizontal px-1">
+    <li>
+      <%= link_to 'Home', root_path, class: current_page?(root_path) ? "link link-hover text-blue-600" : "link link-hover" %>
+    </li>
+    <% if user_signed_in? %>
+      <% if current_user&.profile&.admin? %>
         <li>
-          <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+          <%= link_to "User", edit_user_registration_path, class: current_page?(edit_user_registration_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
         </li>
-      <% else %>
         <li>
-          <%= link_to "Log in", new_user_session_path %>
+          <%= link_to "Profiles", users_path, class: current_page?(users_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
         </li>
       <% end %>
-    </ul>
-  </div>
+      <li>
+        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "link link-hover" %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "Log in", new_user_session_path, class: current_page?(new_user_session_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
   <div data-controller="theme" data-action="change->theme#saveCheckboxState" >
         <label class="swap swap-rotate">
         <!-- this hidden checkbox controls the state -->

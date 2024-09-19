@@ -5,7 +5,7 @@ class CreateProfiles < ActiveRecord::Migration[7.2]
       t.string :first_name, null: false, default: "", limit: 255
       t.string :last_name, null: false, default: "", limit: 255
       t.string :role, default: "employee"
-      t.integer :status, default: 0
+      t.string :status, default: "inactive"
       t.string :notes, default: ""
       t.timestamps
     end

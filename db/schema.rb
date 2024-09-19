@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211023) do
     t.string "first_name", limit: 255, default: "", null: false
     t.string "last_name", limit: 255, default: "", null: false
     t.string "role", default: "employee"
-    t.integer "status", default: 0
+    t.string "status", default: "inactive"
     t.string "notes", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

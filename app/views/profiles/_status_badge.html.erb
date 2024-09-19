@@ -1,10 +1,10 @@
 <% status_class = user.profile.status %>
 <% case status_class %>
-<% when 0 %>
+<% when "active" %>
   <div class="badge badge-success">
     active
   </div>
-<% when 1 %>
+<% when "inactive" %>
   <div class="badge badge-error">
     inactive
   </div>

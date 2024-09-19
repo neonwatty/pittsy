@@ -13,7 +13,7 @@
         <div class="w-full h-5"></div>
       </div>
       <div class="bg-base-300 rounded-b-box rounded-se-box relative overflow-x-auto" id="outer_index_div" >
-        <div class="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-5xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 [border-width:var(--tab-border)]">
+        <div class="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-7xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 [border-width:var(--tab-border)]">
           <div class="flex flex-col">
             <div class="overflow-x-auto">
               <table class="table">
@@ -25,13 +25,13 @@
                     <th>Role</th>
                     <th>Status</th>
                     <th>Notes</th>
-                    <th>Created At</th>
+                    <th>Updated At</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @users.each_with_index do |user, index| %> <!-- Reverse order here -->
-                    <% user_created_at = user.created_at %>
+                    <% user_updated_at = user.updated_at %>
                     <tr>
                       <th>
                         <input type="checkbox" 
@@ -66,7 +66,7 @@
                         <div class="text-sm opacity-100"><%= user.profile.notes %></div>
                       </td>
                       <td>
-                        <div class="text-sm opacity-50"><%= user.created_at %></div>
+                        <div class="text-sm opacity-50"><%= user.updated_at %></div>
                       </td>
                       <th>
                         <%= link_to "Show Profile", user_profile_path(user, user.profile), class: "btn btn-sm btn-primary" %>
@@ -82,7 +82,7 @@
                     <th>Role</th>
                     <th>Status</th>
                     <th>Notes</th>
-                    <th>Created At</th>
+                    <th>Updated At</th>
                     <th></th>
                   </tr>
                 </tfoot>

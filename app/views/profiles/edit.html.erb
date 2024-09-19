@@ -22,25 +22,23 @@
                 <%= form.text_field :last_name, value: last_name, class: "user-profile-input-field" %>
               </div>
               <div class="field flex flex-col pt-5">
-                <% user_status = @profile.status %>
-                <%= form.label :status, "status", class: "block text-sm font-medium mb-1" %>
-                <%= form.select :status, 
-                   options_for_select([['active', 'active'], 
-                                       ['inactive', 'inactive']], 
-                                      'status'), 
-                   { selected: user_status },
-                   {class: "user-profile-input-field"} %>
-              </div>
-              <div class="field flex flex-col pt-5">
                 <% user_role = @profile.role %>
                 <%= form.label :role, "role", class: "block text-sm font-medium mb-1" %>
                 <%= form.select :role, 
                    options_for_select([['admin', 'admin'], 
                                        ['employee', 'employee']], 
-                                      'role'), 
-                   { selected: user_role },
+                                      user_role), 
                     {class: "user-profile-input-field"}
                 %>
+              </div>
+              <div class="field flex flex-col pt-5">
+                <% user_status = @profile.status %>
+                <%= form.label :status, "status", class: "block text-sm font-medium mb-1" %>
+                <%= form.select :status, 
+                   options_for_select([['active', 'active'], 
+                                       ['inactive', 'inactive']], 
+                                      user_status), 
+                   {class: "user-profile-input-field"} %>
               </div>
               <div class="field flex flex-col pt-5">
                 <% notes=@profile.notes %>

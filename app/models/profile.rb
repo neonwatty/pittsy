@@ -3,7 +3,7 @@ class Profile < ApplicationRecord
   before_save :set_default_avatar
 
   validates :role, presence: true, inclusion: { in: %w[admin employee] }
-  validates :status, presence: true, inclusion: { in: [ 0, 1 ] }
+  validates :status, presence: true, inclusion: { in: %w[active inactive] }
   validates :first_name, presence: true, length: { maximum: 255 }
   validates :last_name, presence: true, length: { maximum: 255 }
   validates :notes, length: { maximum: 255 }
