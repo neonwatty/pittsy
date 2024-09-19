@@ -184,8 +184,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
   create_table "shifts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.date "date"
-    t.integer "shift"
+    t.integer "shift_number"
     t.string "job_type"
+    t.string "status", default: "unassigned"
+    t.string "notes", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_shifts_on_user_id"

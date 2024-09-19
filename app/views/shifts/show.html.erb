@@ -1,0 +1,36 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200">
+  <div class="flex-col gap-x-5 gap-y-10 p-10">
+    # print the shift details
+    <div class="card bg-base-100 shadow-xl w-96 p-5" id="shift_details_<%= @shift.id %>">
+      <div class="card bg-base-150 flex-row ga justify-center">
+        <div class="p-5 flex flex-col">
+          <div class="flex flex-col justify-center content-center">
+            <h1 class="text-lg p-3"> Shift for shift id <%= @shift.id %></h1>
+          </div>
+          <div class="flex flex-col gap-4 pt-5">
+            <div> shift user: <%= @shift.user.profile.full_name %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> shift number: <%= @shift.shift_number %> </div>
+          </div>
+          <% if current_user&.profile&.admin? %>
+            <div class="flex flex-col gap-4 pt-5">
+              <div> job_type:  <%= render "shifts/job_type_badge", shift: @shift %> </div>
+              <div> status:  <%= render "shifts/status_badge", shift: @shift %></div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div> notes: <%= @shift.notes %></div>
+            </div>
+          <% end %>
+          <div class="flex gap-4 mt-4 justify-center">
+            <%= link_to 'Back', shifts_path, class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+            <% if current_user&.profile&.admin? %>
+              <%= link_to "Edit Shift" , edit_shift_path(@shift), class: 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500' %>
+            <% end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

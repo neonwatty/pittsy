@@ -1,0 +1,15 @@
+<% status_class = shift.job_type %>
+<% case status_class %>
+<% when "briqu" %>
+  <div class="badge badge-outline">
+    briquette
+  </div>
+<% when "dryer" %>
+  <div class="badge badge-outline">
+    dryter
+  </div>
+<% else %>
+  <div class="badge badge-secondary badge-danger">
+    unknown
+  </div>
+<% end %>

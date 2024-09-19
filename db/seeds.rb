@@ -14,7 +14,7 @@ user.update!(
   password_confirmation: "password"
 )
 
-# create a profile for the user
+### create user profiles ####
 profile = user.profile || user.build_profile
 profile.update!(
   first_name: "Robert",
@@ -72,3 +72,42 @@ profile.update!(
   notes: "Bob is a great employee.",
   avatar: Rails.root.join("app/assets/images/avatars/avatar_4.png").open
 )
+
+### create shifts ####
+user = User.find(1)
+shift = Shift.where(date: Date.today, user: user).first_or_initialize
+shift.update!(
+  shift_number: 3,
+  job_type: "dryer",
+  status: "unassigned",
+  notes: "Reminder to self - assign this shift."
+)
+
+user = User.find(2)
+shift = Shift.where(date: Date.today, user: user).first_or_initialize
+shift.update!(
+  shift_number: 1,
+  job_type: "briqu",
+  status: "scheduled",
+  notes: "Ben is working the briqu machine today."
+)
+
+user = User.find(3)
+shift = Shift.where(date: Date.today, user: user).first_or_initialize
+shift.update!(
+  shift_number: 2,
+  job_type: "dryer",
+  status: "complete",
+  notes: "Josh is working the dryer today."
+)
+
+user = User.find(4)
+shift = Shift.where(date: Date.today, user: user).first_or_initialize
+shift.update!(
+  shift_number: 3,
+  job_type: "briqu",
+  status: "working",
+  notes: "Bob is working the briqu machine today."
+)
+
+puts "Seeds finished."

@@ -8,25 +8,17 @@
     <% if user_signed_in? %>
       <% if current_user&.profile&.admin? %>
         <li>
-          <%= link_to "User", edit_user_registration_path, class: current_page?(edit_user_registration_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
+          <%= link_to "User", edit_user_registration_path, class: current_page?(edit_user_registration_path) ? "link link-hover text-blue-600 bg-blue-100 text-sm" : "link link-hover text-sm" %>
         </li>
         <li>
           <%= link_to "Profiles", users_path, class: current_page?(users_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
         </li>
-      <li>
-        <div class="dropdown dropdown-bottom <%= current_page?(shifts_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>">
-          <div tabindex="0" role="link" class="link link-hover">Shifts</div>
-            <ul tabindex="0" class="dropdown-content menu link link-hover bg-blue-100">
-                <li>
-                <%= link_to "All", shifts_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" %>
-                </li>
-              </ul>
-           </div>
-          </div>
+        <li>
+          <%= link_to "Shifts", shifts_path, class: current_page?(shifts_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
         </li>
       <% end %>
       <li>
-        <div class="pb-0.5">
+        <div class="pb-0.5 pl-5">
         <%= button_to "Log out", destroy_user_session_path, method: :delete, class: current_page?(destroy_user_session_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover text-sm" %>
         </div>
       </li>

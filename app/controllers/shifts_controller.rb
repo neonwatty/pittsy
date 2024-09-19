@@ -1,5 +1,8 @@
 class ShiftsController < ApplicationController
   before_action :authorize_admin
+  before_action :set_user
+  before_action :set_shift, only: %i[show edit update destroy]
+
 
   def index
     @shifts = Shift.order(created_at: :asc)
@@ -35,11 +38,21 @@ class ShiftsController < ApplicationController
   end
 
   def destroy
+    @shift.destroy
+    redirect_to shifts_path, notice: "Profile was successfully destroyed."
   end
 
   private
 
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
+  def set_shift
+    @shift = @user.shift
+  end
+
   def shift_params
-    params.require(:shift).permit(:date, :shift_num, :job_type)
+    params.require(:shift).permit(:date, :shift_number, :job_type, :status, :notes)
   end
 end
