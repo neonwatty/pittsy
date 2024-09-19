@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_26_211023) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_26_211026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,35 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211023) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "briquette_job_assignments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "shift_id"
+    t.date "date"
+    t.integer "scheduled_hours_blast"
+    t.integer "scheduled_hours_bop"
+    t.integer "total_scheduled_hours"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shift_id"], name: "index_briquette_job_assignments_on_shift_id"
+    t.index ["user_id"], name: "index_briquette_job_assignments_on_user_id"
+  end
+
+  create_table "dryer_job_assignments", force: :cascade do |t|
+    t.bigint "shift_id"
+    t.bigint "user_id"
+    t.date "date"
+    t.string "blend"
+    t.integer "num_bays_full_blast"
+    t.decimal "bentonite_inventory_end_of_shift"
+    t.decimal "cement_inventory_end_of_shift"
+    t.decimal "molasses_inventory_tank_one_end_of_shift"
+    t.decimal "molasses_inventory_tank_two_end_of_shift"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shift_id"], name: "index_dryer_job_assignments_on_shift_id"
+    t.index ["user_id"], name: "index_dryer_job_assignments_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "first_name", limit: 255, default: "", null: false
@@ -53,6 +82,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211023) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date"
+    t.integer "shift"
+    t.string "job_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_shifts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,4 +114,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211023) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "profiles", "users"
+  add_foreign_key "shifts", "users"
 end
