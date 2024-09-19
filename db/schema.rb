@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_26_211026) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,6 +56,26 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211026) do
     t.index ["user_id"], name: "index_briquette_job_assignments_on_user_id"
   end
 
+  create_table "briquette_job_timesheets", force: :cascade do |t|
+    t.bigint "briquette_assignment_id"
+    t.time "start_time"
+    t.integer "briquette_speed"
+    t.boolean "bop_or_blast"
+    t.decimal "dry_material"
+    t.decimal "wet_bentonite"
+    t.string "pug_mill_one_amp"
+    t.integer "water"
+    t.string "tons_per_hour"
+    t.string "briquette_moisture"
+    t.string "pug_mill_two_amp"
+    t.string "bulk_density"
+    t.string "lime"
+    t.string "molasses"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["briquette_assignment_id"], name: "index_briquette_job_timesheets_on_briquette_assignment_id"
+  end
+
   create_table "dryer_job_assignments", force: :cascade do |t|
     t.bigint "shift_id"
     t.bigint "user_id"
@@ -70,6 +90,83 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211026) do
     t.datetime "updated_at", null: false
     t.index ["shift_id"], name: "index_dryer_job_assignments_on_shift_id"
     t.index ["user_id"], name: "index_dryer_job_assignments_on_user_id"
+  end
+
+  create_table "dryer_timesheets", force: :cascade do |t|
+    t.bigint "dryer_assignment_id"
+    t.time "start_time"
+    t.decimal "material_rate_bin_a"
+    t.decimal "cyclone_photo"
+    t.decimal "control_setpoint"
+    t.decimal "control_temp"
+    t.integer "gas_valve_position"
+    t.integer "background_temp"
+    t.decimal "baghouse_temp"
+    t.decimal "baghouse_fan_amp"
+    t.decimal "material_moisture"
+    t.decimal "air_compression"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dryer_assignment_id"], name: "index_dryer_timesheets_on_dryer_assignment_id"
+  end
+
+  create_table "equipment", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.string "category"
+    t.integer "quantity", default: 0
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_equipment_on_user_id"
+  end
+
+  create_table "inspect_skidsteers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "inspector_name"
+    t.integer "shift"
+    t.integer "machine_hours"
+    t.integer "structural_damage"
+    t.string "structural_damage_comments"
+    t.integer "tires_tracks"
+    t.string "tire_tracks_comments"
+    t.integer "glass_mirrors"
+    t.string "glass_mirrors_comments"
+    t.integer "electrical_connections"
+    t.string "electrical_connections_comments"
+    t.integer "hydraulic_hoses"
+    t.string "hydraulic_hoses_comments"
+    t.integer "lubrication"
+    t.string "lubrication_comments"
+    t.integer "fluid_levels"
+    t.string "fluid_levels_comments"
+    t.integer "engine_oil"
+    t.string "engine_oil_comments"
+    t.integer "coolant"
+    t.string "coolant_comments"
+    t.integer "fire_extinguisher"
+    t.string "fire_extinguisher_comments"
+    t.integer "seat_belts"
+    t.string "seat_belts_comments"
+    t.integer "operating_controls"
+    t.string "operating_controls_comments"
+    t.integer "horn_gauges"
+    t.string "horn_gauges_comments"
+    t.integer "lights_reflectors"
+    t.string "lights_reflectors_comments"
+    t.integer "windsheild_wipers"
+    t.string "windsheild_wipers_comments"
+    t.integer "ac_heat"
+    t.string "ac_heat_comments"
+    t.integer "steering_system"
+    t.string "steering_system_comments"
+    t.integer "brakes"
+    t.string "brakes_comments"
+    t.integer "backup_alarm"
+    t.string "backup_alarm_comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_inspect_skidsteers_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -113,6 +210,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211026) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "equipment", "users"
+  add_foreign_key "inspect_skidsteers", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "shifts", "users"
 end

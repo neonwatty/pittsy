@@ -3,7 +3,7 @@ class CreateShifts < ActiveRecord::Migration[7.2]
     create_table :shifts do |t|
       t.belongs_to :user, null: false, foreign_key: true, index: true
       t.date :date
-      t.integer :shift
+      t.integer :shift_num
       t.string :job_type
       t.timestamps
     end

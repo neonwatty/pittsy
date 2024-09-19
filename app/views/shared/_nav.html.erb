@@ -1,5 +1,5 @@
 <div class="navbar bg-base-100" id="navbar">
-  <%= link_to 'pittsy', root_path, class: 'btn btn-ghost text-xl' %>
+<%= link_to 'pittsy', root_path, class: 'btn btn-ghost text-xl' %>
 <div class="flex-none">
   <ul class="menu menu-horizontal px-1">
     <li>
@@ -13,19 +13,30 @@
         <li>
           <%= link_to "Profiles", users_path, class: current_page?(users_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
         </li>
+      <li>
+        <div class="dropdown dropdown-bottom <%= current_page?(shifts_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>">
+          <div tabindex="0" role="link" class="link link-hover">Shifts</div>
+            <ul tabindex="0" class="dropdown-content menu link link-hover bg-blue-100">
+                <li>
+                <%= link_to "All", shifts_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" %>
+                </li>
+              </ul>
+           </div>
+          </div>
+        </li>
       <% end %>
       <li>
-        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "link link-hover" %>
+        <div class="pb-0.5">
+        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: current_page?(destroy_user_session_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover text-sm" %>
+        </div>
       </li>
     <% else %>
       <li>
         <%= link_to "Log in", new_user_session_path, class: current_page?(new_user_session_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
       </li>
-    <% end %>
-  </ul>
-</div>
+      <% end %>
 
-  <div data-controller="theme" data-action="change->theme#saveCheckboxState" >
+  <div data-controller="theme" data-action="change->theme#saveCheckboxState" class="justify-end pl-5">
         <label class="swap swap-rotate">
         <!-- this hidden checkbox controls the state -->
         <input type="checkbox" data-theme-target="checkbox" class="theme-controller hidden" value="acid" />
@@ -49,4 +60,5 @@
         </svg>
       </label>
   </div>
+</div>
 </div>

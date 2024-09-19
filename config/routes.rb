@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   # Route for creating profiles
   resources :profiles, only: [ :create ]
 
+  # Route for viewing all shifts
+  resources :shifts
+
   # admin user routes
   #   # Admin-only routes
   authenticated :user, ->(u) { u.admin? } do
