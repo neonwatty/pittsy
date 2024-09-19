@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   rate_limit to: 10, within: 5.minutes, only: [ :create ], with: -> { redirect_to root_path, alert: "Too many registration attempts. Please try again" }
 
-  before_action :authorize_admin, only: [ :new, :create ]
+  before_action :authorize_admin, only: [ :new, :create, :update, :destroy ]
 
   protected
 

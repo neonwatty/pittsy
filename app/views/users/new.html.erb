@@ -1,0 +1,16 @@
+<% render 'shared/nav' %>
+<h1>New User</h1>
+<%= form_for(@user) do |f| %>
+  <%= f.label :email %><br />
+  <%= f.email_field :email, autofocus: true %>
+  <%= f.label :password %><br />
+  <%= f.password_field :password, autocomplete: "off" %>
+  <%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  <%= f.label :role %><br />
+  <%= f.select :role, options_for_select([['Admin', 'admin'], ['Employee', 'employee']], 'employee') %>
+  <div>
+    <%= f.submit "Create User" %>
+  </div>
+<% end %>
+<%= link_to 'Back', users_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_09_235801) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_26_211022) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,60 +43,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_09_235801) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "outputs", force: :cascade do |t|
-    t.bigint "equipment_id", null: false
-    t.string "result"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["equipment_id"], name: "index_outputs_on_equipment_id"
-  end
-
-  create_table "statuses", force: :cascade do |t|
-    t.bigint "equipment_id", null: false
-    t.string "receiver_start"
-    t.string "receiver_preprocess"
-    t.string "receiver_process"
-    t.string "receiver_end"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["equipment_id"], name: "index_statuses_on_equipment_id"
-  end
-
-  create_table "equipments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "filename", limit: 255, null: false
-    t.boolean "files_attached", default: false, null: false
-    t.boolean "process_complete", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_equipments_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "role", default: "employee"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "outputs", "equipments"
-  add_foreign_key "statuses", "equipments"
-  add_foreign_key "equipments", "users"
 end

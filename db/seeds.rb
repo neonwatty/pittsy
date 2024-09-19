@@ -14,3 +14,10 @@ user.update!(
   password_confirmation: "password",
   role: "admin"
 )
+
+user = User.where(email: "jermwatt@gmail.com").first_or_initialize
+user.update!(
+  password: "password",
+  password_confirmation: "password",
+  role: "employee"
+)
