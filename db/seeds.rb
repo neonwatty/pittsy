@@ -26,7 +26,7 @@ user.update!(
   role: "employee",
   first_name: "Ben",
   last_name: "Schmidtetter",
-  status: 1,
+  status: 0,
   avatar: Rails.root.join("app/assets/images/avatars/avatar_2.png").open
 )
 
@@ -37,7 +37,7 @@ user.update!(
   role: "employee",
   first_name: "Josh",
   last_name: "Schmidtetter",
-  status: 1,
+  status: 0,
   avatar: Rails.root.join("app/assets/images/avatars/avatar_3.png").open
 )
 
