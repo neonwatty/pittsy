@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def authorize_admin
-    redirect_to root_path, alert: "Access denied!" unless current_user&.admin?
+    redirect_to root_path, alert: "Access denied!" unless current_user&.profile&.admin?
   end
 
   # before_action :configure_sign_up_params, only: [:create]

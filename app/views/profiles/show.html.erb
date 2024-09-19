@@ -1,0 +1,41 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200">
+  <div class="flex-col gap-x-5 gap-y-10 p-10">
+    <div class="card bg-base-100 shadow-xl w-96 p-5" id="user_details_<%= @user.id %>">
+      <div class="card bg-base-150 flex-row ga justify-center">
+        <div class="p-5 flex flex-col">
+          <div class="flex flex-col justify-center content-center">
+            <h1 class="text-lg p-3"> Profile for <%= @profile.full_name %></h1>
+          </div>
+          <% if @profile.avatar.attached? %>
+            <% input_file = @profile.avatar %>
+            <% if input_file.representable? %>
+              <div class="grid grid-flow-row justify-center">
+                <a href="<%= rails_blob_path(input_file, disposition: "attachment") %>" class="venobox" data-title="<%= @profile.first_name%> <%= @profile.last_name %>" data-gall="gal-1">
+                  <%= image_tag input_file.representation(resize_to_limit: [200, 200]) %>
+                </a>
+              </div>
+            <% else %>
+              <div class="justify-end">
+                <p>No avatar attached.</p>
+              </div>
+            <% end %>
+          <% end %>
+          <div class="flex flex-col gap-4 pt-5">
+            <div> role:  <%= render "profiles/role_badge", user: @user %> </div>
+            <div> status:  <%= render "profiles/status_badge", user: @user %></div>
+          </div>
+          <div class="flex flex-col gap-4 pt-5">
+            <div> notes: <%= @profile.notes %></div>
+          </div>
+          <div class="flex gap-4 mt-4 justify-center">
+            <%= link_to 'Back', users_path, class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+            <% if current_user&.profile&.admin? %>
+              <%= link_to "Edit Profile" , edit_user_profile_path(@user, @profile), class: 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500' %>
+            <% end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

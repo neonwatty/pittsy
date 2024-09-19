@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_26_211022) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_26_211023) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,14 +43,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211022) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "first_name", default: "", null: false
-    t.string "last_name", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+  create_table "profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "first_name", limit: 255, default: "", null: false
+    t.string "last_name", limit: 255, default: "", null: false
     t.string "role", default: "employee"
     t.integer "status", default: 0
     t.string "notes", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -67,4 +74,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211022) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "profiles", "users"
 end

@@ -3,20 +3,26 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # devise routes
   devise_for :users, controllers: {
     confirmations: "users/confirmations",
     sessions: "users/sessions",
     registrations: "users/registrations"
     }
 
-  # user routes
-  resources :users, only: [ :show, :edit, :update ]
+  # Route for viewing all users
+  resources :users, only: [ :index ] do
+    # Nested resource for profiles under users
+    resources :profiles, only: [ :new, :show, :edit, :update ]
+  end
+
+  # Route for creating profiles
+  resources :profiles, only: [ :create ]
 
   # admin user routes
   #   # Admin-only routes
   authenticated :user, ->(u) { u.admin? } do
-    resources :users, only: [ :index, :new, :create, :edit, :update, :destroy ]
+    resources :users, only: [ :index ]
+    resources :profiles, only: [ :new, :create, :edit, :update, :show ]
   end
 
   # Catch-all route for non-existent pages, to be used unless assets are being compiled

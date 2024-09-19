@@ -1,0 +1,64 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200 p-12">
+  <div class="hero-content text-center">
+    <%= form_with model: [@user, @profile] do |form| %>
+      <% if @profile.errors.any? %>
+        <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-lg">
+          <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+          <ul>
+            <% @profile.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :first_name, "first name", class: "block text-sm font-medium mb-1" %>
+        <%= form.text_field :first_name, class: "user-profile-input-field" %>
+      </div>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :last_name, "last name", class: "block text-sm font-medium mb-1" %>
+        <%= form.text_field :last_name, class: "user-profile-input-field" %>
+      </div>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :status, "status", class: "block text-sm font-medium mb-1" %>
+        <%= form.select :status, 
+                   options_for_select([['active', 'active'], 
+                                       ['inactive', 'inactive']], 
+                                      'status'), 
+                   { selected: 'active' },
+                   {class: "user-profile-input-field"} %>
+      </div>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :role, "role", class: "block text-sm font-medium mb-1" %>
+        <%= form.select :role, 
+                   options_for_select([['admin', 'admin'], 
+                                       ['employee', 'employee']], 
+                                      'role'), 
+                   { selected: 'employee' },
+                    {class: "user-profile-input-field"}
+                %>
+      </div>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :notes, "notes", class: "block text-sm font-medium mb-1" %>
+        <%= form.text_area :notes, value: notes, class:  "user-profile-input-field" %>
+      </div>
+      <div class="field mb-5">
+        <%= form.label :avatar, "profile picture", class: "block text-sm font-medium mb-1" %>
+        <div class="dropzone dropzone-default dz-clickable" id="image-upload-area" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-accepted-files="image/png, image/jpg, image/jpeg">
+          <%= form.file_field :avatar, id: "file_input_id",  multiple: false, direct_upload: true,  data: { dropzone_target: 'input' }  %>
+          <div class="dropzone-msg dz-message needsclick text-lg">
+            <h3 class="dropzone-msg-title text-lg">Drag here to upload or click here to browse</h3>
+            <span class="dropzone-msg-desc text-sm">2 MB file size maximum. Allowed file types png, jpg.</span>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <%= form.submit 'Submit', class: "btn btn-primary" %>
+        <p></p>
+        <p></p>
+        <%= link_to 'Back', profiles_path, class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

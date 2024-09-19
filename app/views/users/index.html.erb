@@ -24,7 +24,7 @@
                 <thead>
                   <tr>
                     <th><label><input type="checkbox" class="checkbox hidden" disabled></label></th>
-                    <th>Profile</th>
+                    <th>Avatar</th>
                     <th>Role</th>
                     <th>Status</th>
                     <th>Created At</th>
@@ -45,8 +45,8 @@
                         <div class="flex items-center gap-3">
                           <div class="avatar">
                             <div class="w-12 h-12 mask mask-squircle">
-                              <% if user.avatar.attached? %>
-                                <% user_avatar=user.avatar %>
+                              <% if user.profile.avatar.attached? %>
+                                <% user_avatar=user.profile.avatar %>
                                 <a href="<%= rails_blob_path(user_avatar, disposition: "attachment") %>" class="venobox" data-title="user avatar (<%= user_avatar.filename.to_s%>)" data-gall="gal-<%= index %>">
                                   <%= image_tag user_avatar.variant(:thumb) %>
                                 </a>
@@ -54,21 +54,21 @@
                             </div>
                           </div>
                           <div>
-                            <div class="font-bold"><%= user.first_name %> <%= user.last_name %></div>
+                            <div class="font-bold"><%= user.profile.full_name %></div>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <%= render "users/role_badge", user: user %>
+                        <%= render "profiles/role_badge", user: user %>
                       </td>
                       <td>
-                        <%= render "users/status_badge", user: user %>
+                        <%= render "profiles/status_badge", user: user %>
                       </td>
                       <td>
                         <div class="text-sm opacity-50"><%= user.created_at %></div>
                       </td>
                       <th>
-                        <%= link_to "Edit", edit_user_path(user), class: "btn btn-ghost btn-xs" %>
+                        <%= link_to "Show Profile", user_profile_path(user, user.profile), class: "btn btn-sm btn-primary" %>
                       </th>
                     </tr>
                   <% end %>
@@ -76,9 +76,10 @@
                 <tfoot>
                   <tr>
                     <th></th>
-                    <th>Input</th>
-                    <th>Output</th>
+                    <th>Avatar</th>
+                    <th>Role</th>
                     <th>Status</th>
+                    <th>Created At</th>
                     <th></th>
                   </tr>
                 </tfoot>
