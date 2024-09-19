@@ -22,32 +22,35 @@
           <% end %>
           <%= form_with(model: @user, local: true, class: "flex flex-col p-4") do |form| %>
             <div>
-              <div class="flex flex-col pt-5">
+              <% user_status = @user.status %>
+              <div class="field flex flex-col pt-5">
                 <%= form.label :status, "status", class: "block text-sm font-medium mb-1" %>
                 <%= form.select :status, 
                    options_for_select([['active', 'active'], 
                                        ['inactive', 'inactive']], 
                                       'status'), 
-                   { selected: 'status' },
+                   { selected: user_status },
                    {class: "user-profile-input-field"} %>
               </div>
-              <div class="flex flex-col pt-5">
-                <%= form.label :status, "role", class: "block text-sm font-medium mb-1" %>
-                <%= form.select :status, 
+              <div class="field flex flex-col pt-5">
+                <% user_role = @user.role %>
+                <%= form.label :role, "role", class: "block text-sm font-medium mb-1" %>
+                <%= form.select :role, 
                    options_for_select([['admin', 'admin'], 
                                        ['employee', 'employee']], 
                                       'role'), 
-                   { selected: 'role' },
+                   { selected: user_role },
                     {class: "user-profile-input-field"}
                 %>
               </div>
-              <div class="flex flex-col pt-5">
+              <div class="field flex flex-col pt-5">
+                <% notes=@user.notes %>
                 <%= form.label :notes, "notes", class: "block text-sm font-medium mb-1" %>
-                <%= form.text_area :notes, value: "Enter your notes here...", class:  "user-profile-input-field" %>
+                <%= form.text_area :notes, value: notes, class:  "user-profile-input-field" %>
               </div>
             </div>
             <div class="actions flex pt-5">
-              <%= form.submit "Update", class: "btn btn-primary", disabled: true %>
+              <%= form.submit "Update", class: "btn btn-primary"%>
             </div>
           <% end %>
         </div>

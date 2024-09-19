@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :authorize_admin
+  before_action :set_user, only: [ :edit, :update ]
+
 
   def index
     @users = User.order(created_at: :asc)
@@ -25,20 +27,27 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: "User was successfully deleted."
   end
 
-  def edit
-    @user = User.find(params[:id])
+  def update
+    if @user.update(user_params)
+      redirect_to users_path, notice: "User was successfully updated."
+    else
+      # print error messages
+      puts "Error: " + @user.errors.full_messages.join(", ")
+      render :edit
+    end
   end
 
-  def show
+  def edit
+  end
+
+  def set_user
     @user = User.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to root_path
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:email, :password, :password_confirmation, :role, :notes, :status)
   end
 
   def authorize_admin

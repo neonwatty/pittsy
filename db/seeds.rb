@@ -16,6 +16,7 @@ user.update!(
   first_name: "Robert",
   last_name: "Watt",
   status: 0,
+  notes: "Rob is a great admin.",
   avatar: Rails.root.join("app/assets/images/avatars/avatar_1.png").open
 )
 
@@ -27,6 +28,7 @@ user.update!(
   first_name: "Ben",
   last_name: "Schmidtetter",
   status: 0,
+  notes: "Ben is a great employee.",
   avatar: Rails.root.join("app/assets/images/avatars/avatar_2.png").open
 )
 
@@ -38,6 +40,7 @@ user.update!(
   first_name: "Josh",
   last_name: "Schmidtetter",
   status: 0,
+  notes: "Josh is a great employee.",
   avatar: Rails.root.join("app/assets/images/avatars/avatar_3.png").open
 )
 
@@ -49,5 +52,6 @@ user.update!(
   first_name: "Bob",
   last_name: "Androsik",
   status: 1,
+  notes: "Bob is a great employee.",
   avatar: Rails.root.join("app/assets/images/avatars/avatar_4.png").open
 )
