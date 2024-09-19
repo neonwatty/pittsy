@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
     }
 
+  # user routes
+  resources :users, only: [ :show, :edit, :update ]
+
   # admin user routes
   #   # Admin-only routes
   authenticated :user, ->(u) { u.admin? } do
