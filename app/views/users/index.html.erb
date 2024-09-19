@@ -20,7 +20,7 @@
                 <thead>
                   <tr>
                     <th><label><input type="checkbox" class="checkbox hidden" disabled></label></th>
-                    <th>Email</th>
+                    <th>User</th>
                     <th>Avatar</th>
                     <th>Role</th>
                     <th>Status</th>
@@ -40,7 +40,7 @@
                         disabled>
                       </th>
                       <th>
-                        <div class="text-sm opacity-100"><%= user.email %></div>
+                        <div class="text-sm opacity-70"><%= user.profile.full_name %></div>
                       </th>
                       <td>
                         <div class="flex items-center gap-3">
@@ -53,9 +53,6 @@
                                 </a>
                               <% end %>
                             </div>
-                          </div>
-                          <div>
-                            <div class="font-bold"><%= user.profile.full_name %></div>
                           </div>
                         </div>
                       </td>

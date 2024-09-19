@@ -21,6 +21,9 @@
               </div>
             <% end %>
           <% end %>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> email: <%= @user.email %> </div>
+          </div>
           <% if current_user&.profile&.admin? %>
             <div class="flex flex-col gap-4 pt-5">
               <div> role:  <%= render "profiles/role_badge", user: @user %> </div>

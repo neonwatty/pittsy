@@ -26,38 +26,49 @@ profile.update!(
 )
 
 
-# user = User.where(email: "ben@gmail.com").first_or_initialize
-# user.update!(
-#   password: "password",
-#   password_confirmation: "password",
-#   role: "employee",
-#   first_name: "Ben",
-#   last_name: "Schmidtetter",
-#   status: 0,
-#   notes: "Ben is a great employee.",
-#   avatar: Rails.root.join("app/assets/images/avatars/avatar_2.png").open
-# )
+user = User.where(email: "ben@gmail.com").first_or_initialize
+user.update!(
+  password: "password",
+  password_confirmation: "password",
+)
+profile = user.profile || user.build_profile
+profile.update!(
+ first_name: "Ben",
+ last_name: "Schmidtetter",
+ role: "employee",
+ status: 1,
+ notes: "Ben is a great employee.",
+ avatar: Rails.root.join("app/assets/images/avatars/avatar_2.png").open
+)
 
-# user = User.where(email: "josh@gmail.com").first_or_initialize
-# user.update!(
-#   password: "password",
-#   password_confirmation: "password",
-#   role: "employee",
-#   first_name: "Josh",
-#   last_name: "Schmidtetter",
-#   status: 0,
-#   notes: "Josh is a great employee.",
-#   avatar: Rails.root.join("app/assets/images/avatars/avatar_3.png").open
-# )
 
-# user = User.where(email: "bob@gmail.com").first_or_initialize
-# user.update!(
-#   password: "password",
-#   password_confirmation: "password",
-#   role: "employee",
-#   first_name: "Bob",
-#   last_name: "Androsik",
-#   status: 1,
-#   notes: "Bob is a great employee.",
-#   avatar: Rails.root.join("app/assets/images/avatars/avatar_4.png").open
-# )
+user = User.where(email: "josh@gmail.com").first_or_initialize
+user.update!(
+  password: "password",
+  password_confirmation: "password",
+)
+profile= user.profile || user.build_profile
+profile.update!(
+  role: "employee",
+  first_name: "Josh",
+  last_name: "Schmidtetter",
+  status: 0,
+  notes: "Josh is a great employee.",
+  avatar: Rails.root.join("app/assets/images/avatars/avatar_3.png").open
+)
+
+
+user = User.where(email: "bob@gmail.com").first_or_initialize
+user.update!(
+  password: "password",
+  password_confirmation: "password",
+)
+profile = user.profile || user.build_profile
+profile.update!(
+  role: "employee",
+  first_name: "Bob",
+  last_name: "Androsik",
+  status: 1,
+  notes: "Bob is a great employee.",
+  avatar: Rails.root.join("app/assets/images/avatars/avatar_4.png").open
+)
