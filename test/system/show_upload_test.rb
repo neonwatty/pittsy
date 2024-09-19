@@ -1,0 +1,21 @@
+require "application_system_test_case"
+
+class ShowequipmentTest < ApplicationSystemTestCase
+  fixtures :all
+
+  setup do
+    @user = users(:one)
+    @equipment = equipments(:two)
+  end
+
+  test "test_1: non-logged in user functionality - redirect to sign in" do
+    visit equipment_path(@equipment)
+    assert_current_path new_user_session_path
+  end
+
+  test "test_1: logged in user functionality - details card" do
+    sign_in(@user)
+    visit equipment_path(@equipment)
+    assert_current_path equipment_path(@equipment)
+  end
+end

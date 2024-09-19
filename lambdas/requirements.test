@@ -1,8 +1,0 @@
-boto3
-docker
-requests
-pytest
-pytest-subtests
-python-dotenv
-pytest-xdist
-ruff
