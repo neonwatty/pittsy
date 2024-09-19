@@ -1,10 +1,10 @@
-first_file_attachment:
-  name: files
-  record: one (Upload)
-  blob: first_file_blob
+first_avatar_attachment:
+  name: avatar
+  record: one (User)
+  blob: first_avatar_blob
 
-second_file_attachment:
-  name: files
-  record: two (Upload)
-  blob: second_file_blob
+second_avatar_attachment:
+  name: avatar
+  record: two (User)
+  blob: second_avatar_blob
   

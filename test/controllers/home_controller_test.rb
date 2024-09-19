@@ -1,8 +1,8 @@
 require "test_helper"
 
-class equipmentsControllerTest < ActionDispatch::IntegrationTest
+class HomeControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @equipment = equipments(:one)
+    @users = user(:one)
   end
 
   test "test_1: should get home" do

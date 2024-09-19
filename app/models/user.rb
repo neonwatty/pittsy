@@ -4,6 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  # Associations - active storage
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [ 100, 100 ], preprocessed: true
+  end
+
   # validates role
   validates :role, inclusion: { in: %w[admin employee] }
 
@@ -12,8 +17,8 @@ class User < ApplicationRecord
 
   # Custom validations for email and password fields
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" }
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :first_name, presence: true, length: { minimum: 3, message: "must be at least 3 characters long" }
+  validates :last_name, presence: true, length: { minimum: 3, message: "must be at least 3 characters long" }
   validates :password, presence: true, length: { minimum: 3, message: "must be at least 3 characters long" }
   validates :password_confirmation, presence: true
 
