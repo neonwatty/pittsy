@@ -12,12 +12,18 @@ user = User.where(email: "neonwatty@gmail.com").first_or_initialize
 user.update!(
   password: "password",
   password_confirmation: "password",
-  role: "admin"
+  role: "admin",
+  first_name: "Jeremy",
+  last_name: "Watt",
+  status: 0
 )
 
 user = User.where(email: "jermwatt@gmail.com").first_or_initialize
 user.update!(
   password: "password",
   password_confirmation: "password",
-  role: "employee"
+  role: "employee",
+  first_name: "Rubber",
+  last_name: "Ducky",
+  status: 0
 )

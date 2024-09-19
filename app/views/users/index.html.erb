@@ -55,30 +55,29 @@
                       </div>
                     </div>
                   </td>
-                  <td> # STOPPED HERE
-                    <div class="badge badge-primary"><%= user.role %></div>
-                  </td>
-                  <td> <%= render "uploads/status_badge", upload: upload %></td>
-                  <th>
-                    <%= link_to "Details", upload_path(upload), class: "btn btn-ghost btn-xs" %>
-                  </th>
-                </tr>
-              <% end %>
+                  <div class="badge badge-primary"><%= user.role %></div>
+                </td>
+                <td> <%= render "users/status_badge", upload: upload %></td>
+                <th>
+                  <%= link_to "Details", upload_path(upload), class: "btn btn-ghost btn-xs" %>
+                </th>
+              </tr>
             <% end %>
           <% end %>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th></th>
-            <th>Input</th>
-            <th>Output</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th>Input</th>
+          <th>Output</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </tfoot>
+    </table>
   </div>
+</div>
 </div>
 </div>
 <div class="pagy-nav flex my-5 mb-5 justify-center center-content">
