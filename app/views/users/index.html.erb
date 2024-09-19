@@ -12,21 +12,19 @@
         </button>
         <div class="w-full h-5"></div>
       </div>
-      <div class="bg-base-300 rounded-b-box rounded-se-box relative overflow-x-auto">
-        <div class="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-4xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 [border-width:var(--tab-border)]" style="">
-          <div data-controller="file-sort">
-            <div class="flex justify-center gap-3">
-              <button data-action="click->file-sort#sortAscending" class="btn">&#9650;</button>
-              <button data-action="click->file-sort#sortDescending" class="btn">&#9660;</button>
-            </div>
+      <div class="bg-base-300 rounded-b-box rounded-se-box relative overflow-x-auto" id="outer_index_div" >
+        <div class="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-5xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 [border-width:var(--tab-border)]">
+          <div class="flex flex-col">
             <div class="overflow-x-auto">
-              <table class="table" data-file-sort-target="fileList">
+              <table class="table">
                 <thead>
                   <tr>
                     <th><label><input type="checkbox" class="checkbox hidden" disabled></label></th>
+                    <th>Email</th>
                     <th>Avatar</th>
                     <th>Role</th>
                     <th>Status</th>
+                    <th>Notes</th>
                     <th>Created At</th>
                     <th></th>
                   </tr>
@@ -34,12 +32,15 @@
                 <tbody>
                   <% @users.each_with_index do |user, index| %> <!-- Reverse order here -->
                     <% user_created_at = user.created_at %>
-                    <tr data-created-at="<%= user_created_at.iso8601 %>">
+                    <tr>
                       <th>
                         <input type="checkbox" 
                         class="checkbox hidden" 
                         id="checkbox-<%= index %>"
                         disabled>
+                      </th>
+                      <th>
+                        <div class="text-sm opacity-100"><%= user.email %></div>
                       </th>
                       <td>
                         <div class="flex items-center gap-3">
@@ -65,6 +66,9 @@
                         <%= render "profiles/status_badge", user: user %>
                       </td>
                       <td>
+                        <div class="text-sm opacity-100"><%= user.profile.notes %></div>
+                      </td>
+                      <td>
                         <div class="text-sm opacity-50"><%= user.created_at %></div>
                       </td>
                       <th>
@@ -76,9 +80,11 @@
                 <tfoot>
                   <tr>
                     <th></th>
+                    <th>Email</th>
                     <th>Avatar</th>
                     <th>Role</th>
                     <th>Status</th>
+                    <th>Notes</th>
                     <th>Created At</th>
                     <th></th>
                   </tr>
@@ -87,12 +93,12 @@
             </div>
           </div>
         </div>
-        <div class="pagy-nav flex my-5 mb-5 justify-center center-content">
-          <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
-        </div>
       </div>
-    <% else %>
-      <%= render "users/no_users" %>
-    <% end %>
-  </div>
+      <div class="pagy-nav flex my-5 mb-5 justify-center center-content">
+        <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+      </div>
+    </div>
+  <% else %>
+    <%= render "users/no_users" %>
+  <% end %>
 </div>

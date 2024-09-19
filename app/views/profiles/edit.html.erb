@@ -58,8 +58,7 @@
     <div class="flex gap-4 mt-4 justify-center">
       <%= link_to 'Back', user_profile_path(@user, @profile), class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
       <% if current_user&.profile&.admin? %>
-        <%= button_to "Delete Profile", user_profile_path(@profile, @profile), method: :delete, data: { confirm: "Are you sure?" }, class: 'bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500' %>
-        <%= button_to "Delete User", users_path(@user), method: :delete, data: { confirm: "Are you sure?" }, class: 'bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500' %>
+        <%= button_to "Delete Profile", user_profile_path(@user, @profile), method: :delete, data: { confirm: "Are you sure?" }, class: 'bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500' %>
       <% end%>
     </div>
   </div>
