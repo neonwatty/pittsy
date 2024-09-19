@@ -1,10 +1,9 @@
 <%= render 'shared/nav' %>
 <div class="hero bg-base-200">
   <div class="flex-col gap-x-5 gap-y-10 p-10">
-    <%= render "users/status_badge", user: @user %>
     <div class="card bg-base-100 shadow-xl w-96 p-5" id="user_details_<%= @user.id %>">
       <div class="card bg-base-150 flex-row ga justify-center">
-        <div class="p-5">
+        <div class="p-5 flex flex-col">
           <% if @user.avatar.attached? %>
             <% input_file = @user.avatar %>
             <% if input_file.representable? %>
@@ -23,27 +22,29 @@
           <% end %>
           <%= form_with(model: @user, local: true, class: "flex flex-col p-4") do |form| %>
             <div>
-              <%= form.label :status, "Status", class: "block text-sm font-medium text-gray-700" %>
-              <%= form.select :status, 
-                   options_for_select([['Active', 'active'], 
-                                       ['Inactive', 'inactive']], 
+              <div class="flex flex-col pt-5">
+                <%= form.label :status, "status", class: "block text-sm font-medium text-gray-700" %>
+                <%= form.select :status, 
+                   options_for_select([['active', 'active'], 
+                                       ['inactive', 'inactive']], 
                                       'status'), 
                    { selected: 'status', disabled: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm" } %>
-            </div>
-            <div>
-              <%= form.label :status, "Role", class: "block text-sm font-medium text-gray-700" %>
-              <%= form.select :status, 
-                   options_for_select([['Admin', 'admin'], 
-                                       ['Employee', 'employee']], 
+              </div>
+              <div class="flex flex-col pt-5">
+                <%= form.label :status, "role", class: "block text-sm font-medium text-gray-700" %>
+                <%= form.select :status, 
+                   options_for_select([['admin', 'admin'], 
+                                       ['employee', 'employee']], 
                                       'role'), 
                    { selected: 'role', disabled: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm" } %>
+              </div>
+              <div class="flex flex-col pt-5">
+                <%= form.label :notes, "notes", class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_area :notes, value: "Enter your notes here...", class:  "mt-1 block w-full border border-gray-300 rounded-md shadow-sm", readonly: true %>
+              </div>
             </div>
-            <div class="field flex flex-row">
-              <%= form.label :notes, "Notes" %>
-              <%= form.text_area :notes, value: "Enter your notes here...", readonly: true %>
-            </div>
-            <div class="actions">
-              <%= form.submit "Save", disabled: true %>
+            <div class="actions flex pt-5">
+              <%= form.submit "Update", class: "btn btn-primary", disabled: true %>
             </div>
           <% end %>
         </div>
