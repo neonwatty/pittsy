@@ -15,7 +15,8 @@ user.update!(
   role: "admin",
   first_name: "Jeremy",
   last_name: "Watt",
-  status: 0
+  status: 0,
+  avatar: Rails.root.join("app/assets/images/avatars/avatar_1.jpg").open
 )
 
 user = User.where(email: "jermwatt@gmail.com").first_or_initialize
@@ -25,5 +26,6 @@ user.update!(
   role: "employee",
   first_name: "Rubber",
   last_name: "Ducky",
-  status: 0
+  status: 0,
+  avatar: Rails.root.join("app/assets/images/avatars/avatar_2.jpg").open
 )
