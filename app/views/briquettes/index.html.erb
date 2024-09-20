@@ -21,7 +21,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% @shifts.each_with_index do |shift, index| %>
+                  <% @briquettes.each_with_index do |briquette, index| %>
                     <tr>
                       <th>
                         <input type="checkbox" 
@@ -30,40 +30,25 @@
                         disabled>
                       </th>
                       <th>
-                        <div class="text-sm opacity-70"><%= shift.id %></div>
+                        <div class="text-sm opacity-70"><%= briquette.id %></div>
                       </th>
                       <th>
-                        <div class="text-sm opacity-70"><%= shift.shift_number %></div>
+                        <div class="text-sm opacity-70"><%= briquette.shift.user.full_name %></div>
                       </th>
                       <td>
-                        <div class="flex items-center gap-3">
-                          <div class="avatar">
-                            <div class="w-12 h-12 mask mask-squircle">
-                              <% if shift.user.profile.avatar.attached? %>
-                                <% user_avatar=shift.user.profile.avatar %>
-                                <a href="<%= rails_blob_path(user_avatar, disposition: "attachment") %>" class="venobox" data-title="user avatar (<%= user_avatar.filename.to_s%>)" data-gall="gal-<%= index %>">
-                                  <%= image_tag user_avatar.variant(:thumb) %>
-                                </a>
-                              <% end %>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="text-sm opacity-100"><%= shift.user.profile.full_name %></div>
+                        <div class="text-sm opacity-100"><%= briquette.measurement_time %></div>
                       </td>
                       <td>
-                        <%= render "shifts/job_type_badge", shift: shift %>
+                        <%= render "briquettes/status_badge", briquette: briquette %>
                       </td>
                       <td>
-                        <%= render "shifts/status_badge", shift: shift %>
+                        <div class="text-sm opacity-100"><%= briquette.notes %></div>
                       </td>
                       <td>
-                        <div class="text-sm opacity-100"><%= shift.notes %></div>
-                      </td>
-                      <td>
-                        <div class="text-sm opacity-50"><%= shift.updated_at %></div>
+                        <div class="text-sm opacity-50"><%= briquette.updated_at %></div>
                       </td>
                       <th>
-                        <%= link_to "Details", user_shift_path(shift.user, shift), class: "btn btn-sm btn-primary" %>
+                        <%= link_to "Details", shift_briquette_path(briquette.shift, briquette), class: "btn btn-sm btn-primary" %>
                       </th>
                     </tr>
                   <% end %>
@@ -91,6 +76,6 @@
       </div>
     </div>
   <% else %>
-    <%= render "shifts/no_shifts" %>
+    <%= render "briquettes/no_briquettes" %>
   <% end %>
 </div>

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     }
 
   # Route for viewing all users
-  resources :users, only: [] do
+  resources :users, only: [ :show ] do
     # Nested resource for profiles under users
     resources :profiles, only: [ :new, :show, :edit, :update ]
     # Nested resource for shifts under users
@@ -24,8 +24,8 @@ Rails.application.routes.draw do
   resources :shifts, only: [ :index ]
 
   # Routes for briquettes under shifts
-  resources :shifts, only: [] do
-    resources :briquettes, only: [ :new, :create, :show, :edit, :update ]
+  resources :shifts, only: [ :show ] do
+    resources :briquettes, only: [ :index, :show, :edit, :update ]
   end
 
   # Route for creating profiles

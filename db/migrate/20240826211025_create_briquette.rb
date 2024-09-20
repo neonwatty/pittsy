@@ -15,7 +15,7 @@ class CreateBriquette < ActiveRecord::Migration[7.2]
       t.string :bulk_density, null: true, default: nil
       t.string :lime, null: true, default: nil
       t.string :molasses, null: true, default: nil
-      t.string :status, default: "incomplete"
+      t.string :status, default: "inactive"
       t.string :notes, default: ""
       t.timestamps
     end

@@ -68,6 +68,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
     t.string "bulk_density"
     t.string "lime"
     t.string "molasses"
+    t.string "status", default: "inactive"
+    t.string "notes", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shift_id"], name: "index_briquettes_on_shift_id"

@@ -75,39 +75,15 @@ profile.update!(
 
 ### create shifts ####
 user = User.find(1)
-shift = Shift.where(date: Date.today, user: user).first_or_initialize
-shift.update!(
-  shift_number: 3,
-  job_type: "briqu",
-  status: "unassigned",
-  notes: "Reminder to self - assign this shift."
-)
+Shift.create!(date: Date.today, user: user, job_type: "brique", shift_number: 3, status: "unassigned", notes: "Reminder to self - assign this shift.")
 
 user = User.find(2)
-shift = Shift.where(date: Date.today, user: user).first_or_initialize
-shift.update!(
-  shift_number: 1,
-  job_type: "briqu",
-  status: "scheduled",
-  notes: "Ben is working the briqu machine today."
-)
+Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 1, status: "scheduled", notes: "Ben is working the briqu machine today.")
 
 user = User.find(3)
-shift = Shift.where(date: Date.today, user: user).first_or_initialize
-shift.update!(
-  shift_number: 2,
-  job_type: "briqu",
-  status: "complete",
-  notes: "Josh is working the dryer today."
-)
+Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 2, status: "complete", notes: "Josh is working the dryer today.")
 
 user = User.find(4)
-shift = Shift.where(date: Date.today, user: user).first_or_initialize
-shift.update!(
-  shift_number: 3,
-  job_type: "briqu",
-  status: "working",
-  notes: "Bob is working the briqu machine today."
-)
+Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 3, status: "working", notes: "Bob is working the briqu machine today.")
 
 puts "Seeds finished."
