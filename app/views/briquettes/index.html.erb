@@ -11,12 +11,11 @@
                   <tr>
                     <th><label><input type="checkbox" class="checkbox hidden" disabled></label></th>
                     <th>Briquette shift id</th>
+                    <th>Shift id </th>
                     <th>Shift user </th>
-                    <th>Measurement time</th>
-                    <th>Briquette speed</th>
+                    <th>Last updated</th>
                     <th>Status</th>
                     <th>Notes</th>
-                    <th>Updated At</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -30,23 +29,22 @@
                         disabled>
                       </th>
                       <th>
-                        <% Rails.logger.info "HELLO Briquette ID: #{briquette.id}" %>
                         <div class="text-sm opacity-70"><%= briquette.id %></div>
+                      </th>
+                      <th>
+                        <div class="text-sm opacity-70"><%= briquette.shift.id %></div>
                       </th>
                       <th>
                         <div class="text-sm opacity-70"><%= briquette.shift.user.profile.full_name %></div>
                       </th>
                       <td>
-                        <div class="text-sm opacity-100"><%= briquette.measurement_time %></div>
+                        <div class="text-sm opacity-100"><%= briquette.updated_at %></div>
                       </td>
                       <td>
                         <%= render "briquettes/status_badge", briquette: briquette %>
                       </td>
                       <td>
                         <div class="text-sm opacity-100"><%= briquette.notes %></div>
-                      </td>
-                      <td>
-                        <div class="text-sm opacity-50"><%= briquette.updated_at %></div>
                       </td>
                       <th>
                         <%= link_to "Details", shift_briquette_path(briquette.shift, briquette), class: "btn btn-sm btn-primary" %>
@@ -58,12 +56,11 @@
                   <tr>
                     <th></th>
                     <th>Briquette shift id</th>
+                    <th>Shift id </th>
                     <th>Shift user </th>
-                    <th>Measurement time</th>
-                    <th>Briquette speed</th>
+                    <th>Last updated</th>
                     <th>Status</th>
                     <th>Notes</th>
-                    <th>Updated At</th>
                     <th></th>
                   </tr>
                 </tfoot>

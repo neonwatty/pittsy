@@ -24,15 +24,19 @@ class BriquettesController < ApplicationController
   end
 
   def update
+    # add status to params
+    briquette_params[:status] = @briquette.status
+
     if @briquette.update(briquette_params)
       redirect_to shift_briquette_path(@shift, @briquette), notice: "Briquette shift was successfully updated."
     else
-      render :edit
+      flash[:alert] = "Failure: Briquette shift was not successfully updated. Errors: #{ @briquette.errors.full_messages.join(', ') }"
+      redirect_to shift_briquette_path(@shift, @briquette)
     end
   end
 
   def index
-    @briquettes = @briquettes.order(updated_at: :desc)
+    @briquettes = @briquettes
     @pagy, @briquettes = pagy(@briquettes)
   end
 

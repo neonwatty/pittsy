@@ -8,7 +8,7 @@
           <div class="flex flex-col justify-center content-center">
             <label for="measurement_time">Measurement Time:</label>
             <select name="measurement_time" id="measurement_time" disabled>
-              <option value="">Not chosen</option>
+              <option value=""><%= @briquette.measurement_time %></option>
               <% (0..23).each do |hour| %>
                 <option value="<%= hour %>" <%= hour == @briquette.measurement_time ? 'selected' : '' %>>
       <%= format('%02d:00', hour) %>
