@@ -4,61 +4,57 @@
     <div class="card bg-base-100 shadow-xl w-96 p-5" id="briquette_details_<%= @briquette.id %>">
       <div class="card bg-base-150 flex-row ga justify-center">
         <div class="p-5 flex flex-col">
-          <h1 class="text-lg p-3"> Timesheet details for shift id <%= @shift.id %></h1>
           <div class="flex flex-col justify-center content-center">
+            <h1 class="text-lg p-3"> Timesheet details for shift id <%= @shift.id %></h1>
+          </div>
+          <div class="flex flex-col gap-4 pt-5">
             <label for="measurement_time">Measurement Time:</label>
-            <select name="measurement_time" id="measurement_time" disabled>
-              <option value=""><%= @briquette.measurement_time %></option>
-              <% (0..23).each do |hour| %>
-                <option value="<%= hour %>" <%= hour == @briquette.measurement_time ? 'selected' : '' %>>
-      <%= format('%02d:00', hour) %>
-    </option>
-                <% end %>
-              </select>
-            </div>
-            <div class="flex flex-col gap-4 pt-5">
-              <div> briquette_speed: <%= @briquette.briquette_speed || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> bop_or_blast: <%= @briquette.bop_or_blast || 'null'%> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> dry_material: <%= @briquette.dry_material || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> wet_bentonite: <%= @briquette.wet_bentonite || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> pug_mill_one_amp: <%= @briquette.pug_mill_one_amp || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> water: <%= @briquette.water || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> tons_per_hour: <%= @briquette.tons_per_hour || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> briquette_moisture: <%= @briquette.briquette_moisture || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> pug_mill_two_amp: <%= @briquette.pug_mill_two_amp || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> bulk_density: <%= @briquette.bulk_density || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> lime: <%= @briquette.lime || 'null' %> </div>
-            </div>
-            <div class = "flex flex-col gap-4 pt-5">
-              <div> molasses: <%= @briquette.molasses || 'null' %> </div>
-            </div>
-            <div class="flex gap-4 mt-4 justify-center">
-              <%= link_to 'Back', shift_briquettes_path(@shift), class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
-              <% if current_user&.profile&.admin? %>
-                <%= link_to "Edit Briquette" , edit_shift_briquette_path(@shift, @briquette), class: 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500' %>
-              <% end%>
-            </div>
+            <%= @briquette.measurement_time.present? ? @briquette.measurement_time : 'None chosen' %>
+          </div>
+          <div class="flex flex-col gap-4 pt-5">
+            <div> briquette_speed: <%= @briquette.briquette_speed || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> bop_or_blast: <%= @briquette.bop_or_blast || 'null'%> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> dry_material: <%= @briquette.dry_material || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> wet_bentonite: <%= @briquette.wet_bentonite || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> pug_mill_one_amp: <%= @briquette.pug_mill_one_amp || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> water: <%= @briquette.water || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> tons_per_hour: <%= @briquette.tons_per_hour || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> briquette_moisture: <%= @briquette.briquette_moisture || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> pug_mill_two_amp: <%= @briquette.pug_mill_two_amp || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> bulk_density: <%= @briquette.bulk_density || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> lime: <%= @briquette.lime || 'null' %> </div>
+          </div>
+          <div class = "flex flex-col gap-4 pt-5">
+            <div> molasses: <%= @briquette.molasses || 'null' %> </div>
+          </div>
+          <div class="flex gap-4 mt-4 justify-center">
+            <%= link_to 'Back', shift_briquettes_path(@shift), class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+            <% if current_user&.profile&.admin? %>
+              <%= link_to "Edit Briquette" , edit_shift_briquette_path(@shift, @briquette), class: 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500' %>
+            <% end%>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
