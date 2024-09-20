@@ -2,8 +2,6 @@ class CreateDryerAssignments < ActiveRecord::Migration[7.2]
   def change
     create_table :dryer_job_assignments do |t|
       t.belongs_to :shift
-      t.belongs_to :user
-      t.date :date
       t.string :blend
       t.integer :num_bays_full_blast
       t.decimal :bentonite_inventory_end_of_shift

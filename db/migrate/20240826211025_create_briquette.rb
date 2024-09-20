@@ -1,8 +1,8 @@
-class CreateBriquetteTimesheets < ActiveRecord::Migration[7.2]
+class CreateBriquette < ActiveRecord::Migration[7.2]
   def change
-    create_table :briquette_job_timesheets do |t|
-      t.belongs_to :briquette_assignment
-      t.time :start_time
+    create_table :briquette do |t|
+      t.belongs_to :shift, null: false, foreign_key: true, index: true
+      t.time :measurement_time
       t.integer :briquette_speed
       t.boolean :bop_or_blast
       t.decimal :dry_material
@@ -17,5 +17,6 @@ class CreateBriquetteTimesheets < ActiveRecord::Migration[7.2]
       t.string :molasses
       t.timestamps
     end
+    add_index :briquette_times, [ :shift_id, :measurement_time ], unique: true, name: 'index_briquette_on_shift_and_time'
   end
 end
