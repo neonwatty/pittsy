@@ -4,11 +4,11 @@ class ShiftsController < ApplicationController
   before_action :set_shift, only: %i[show edit update destroy]
 
   def new
-    @shift = @user.build_shift
+    @shift = @user.shifts.build
   end
 
   def create
-    @shift = @user.build_shift(shift_params)
+    @shift = @user.shifts.build(shift_params)
     if @shift.save
       redirect_to shifts_path, notice: "shift was successfully created."
     else
@@ -47,7 +47,7 @@ class ShiftsController < ApplicationController
   end
 
   def set_shift
-    @shift = @user.shift
+    @shift = @user.shifts.find(params[:id])
   end
 
   def shift_params

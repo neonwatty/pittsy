@@ -12,7 +12,7 @@
     stroke-linejoin="round"
     stroke-width="2"
     d="M12 4v16m-8-8h16" />
-  </svg>'), new_user_shift_path, class: 'btn btn-circle link link-hover text-600 bg-blue-600', role: 'button', escape: false %>
+  </svg>'), new_user_shift_path(current_user), class: 'btn btn-circle link link-hover text-600 bg-blue-600', role: 'button', escape: false %>
     <% if @shifts.present? %>
       <div class="bg-base-300 rounded-b-box rounded-se-box relative overflow-x-auto" id="outer_index_div" >
         <div class="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-8xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 [border-width:var(--tab-border)]">
@@ -75,7 +75,7 @@
                         <div class="text-sm opacity-50"><%= shift.updated_at %></div>
                       </td>
                       <th>
-                        <%= link_to "Show shift", shift_path(shift), class: "btn btn-sm btn-primary" %>
+                        <%= link_to "Show shift", user_shift_path(shift.user, shift), class: "btn btn-sm btn-primary" %>
                       </th>
                     </tr>
                   <% end %>
