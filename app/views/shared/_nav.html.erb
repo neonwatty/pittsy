@@ -1,5 +1,8 @@
 <div class="navbar bg-base-100" id="navbar">
-<%= link_to 'pittsy', root_path, class: 'btn btn-ghost text-xl' %>
+<%= link_to 'pittsy', root_path, class: 'text-xl pb-3 text-gray-800 hover:text-blue-600' %>
+<% if current_user&.profile&.admin? %>
+  <span class="text-xs text-gray-600">admin</span>
+<% end %>
 <div class="flex-none">
   <ul class="menu menu-horizontal px-1">
     <li>
