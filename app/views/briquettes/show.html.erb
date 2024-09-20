@@ -1,0 +1,56 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200">
+  <div class="flex-col gap-x-5 gap-y-10 p-10">
+    // create form for these parameters to show up
+    <div class="card bg-base-100 shadow-xl w-96 p-5" id="briquette_details_<%= @briquette.id %>">
+      <div class="card bg-base-150 flex-row ga justify-center">
+        <div class="p-5 flex flex-col">
+          <div class="flex flex-col justify-center content-center">
+            <input disabled: true> <%= @briquette.measurement_time %> </input>
+        </div>
+        <div class="flex flex-col gap-4 pt-5">
+          <div> briquette_speed: <%= @briquette.briquette_speed %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> bop_or_blast: <%= @briquette.bop_or_blast %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> dry_material: <%= @briquette.dry_material %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> wet_bentonite: <%= @briquette.wet_bentonite %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> pug_mill_one_amp: <%= @briquette.pug_mill_one_amp %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> water: <%= @briquette.water %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> tons_per_hour: <%= @briquette.tons_per_hour %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> briquette_moisture: <%= @briquette.briquette_moisture %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> pug_mill_two_amp: <%= @briquette.pug_mill_two_amp %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> bulk_density: <%= @briquette.bulk_density %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> lime: <%= @briquette.lime %> </div>
+        </div>
+        <div class = "flex flex-col gap-4 pt-5">
+          <div> molasses: <%= @briquette.molasses %> </div>
+        </div>
+        <div class="flex gap-4 mt-4 justify-center">
+          <%= link_to 'Back', briquettes_path, class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+          <% if current_user&.profile&.admin? %>
+            <%= link_to "Edit Briquette" , edit_briquette_path(@briquette), class: 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500' %>
+          <% end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
