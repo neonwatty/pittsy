@@ -43,22 +43,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "briquette_job_assignments", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "shift_id"
-    t.date "date"
-    t.integer "scheduled_hours_blast"
-    t.integer "scheduled_hours_bop"
-    t.integer "total_scheduled_hours"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["shift_id"], name: "index_briquette_job_assignments_on_shift_id"
-    t.index ["user_id"], name: "index_briquette_job_assignments_on_user_id"
-  end
-
-  create_table "briquette_job_timesheets", force: :cascade do |t|
-    t.bigint "briquette_assignment_id"
-    t.time "start_time"
+  create_table "briquette", force: :cascade do |t|
+    t.bigint "shift_id", null: false
+    t.time "measurement_time"
     t.integer "briquette_speed"
     t.boolean "bop_or_blast"
     t.decimal "dry_material"
@@ -73,13 +60,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
     t.string "molasses"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["briquette_assignment_id"], name: "index_briquette_job_timesheets_on_briquette_assignment_id"
+    t.index ["shift_id"], name: "index_briquette_on_shift_id"
+  end
+
+  create_table "briquette_job_assignments", force: :cascade do |t|
+    t.bigint "shift_id"
+    t.integer "scheduled_hours_blast"
+    t.integer "scheduled_hours_bop"
+    t.integer "total_scheduled_hours"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shift_id"], name: "index_briquette_job_assignments_on_shift_id"
   end
 
   create_table "dryer_job_assignments", force: :cascade do |t|
     t.bigint "shift_id"
-    t.bigint "user_id"
-    t.date "date"
     t.string "blend"
     t.integer "num_bays_full_blast"
     t.decimal "bentonite_inventory_end_of_shift"
@@ -89,12 +84,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shift_id"], name: "index_dryer_job_assignments_on_shift_id"
-    t.index ["user_id"], name: "index_dryer_job_assignments_on_user_id"
   end
 
   create_table "dryer_timesheets", force: :cascade do |t|
-    t.bigint "dryer_assignment_id"
-    t.time "start_time"
+    t.bigint "shift_id"
+    t.time "measurement_time"
     t.decimal "material_rate_bin_a"
     t.decimal "cyclone_photo"
     t.decimal "control_setpoint"
@@ -107,7 +101,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
     t.decimal "air_compression"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dryer_assignment_id"], name: "index_dryer_timesheets_on_dryer_assignment_id"
+    t.index ["shift_id"], name: "index_dryer_timesheets_on_shift_id"
   end
 
   create_table "equipment", force: :cascade do |t|
@@ -212,6 +206,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "briquette", "shifts"
   add_foreign_key "equipment", "users"
   add_foreign_key "inspect_skidsteers", "users"
   add_foreign_key "profiles", "users"

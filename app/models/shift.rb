@@ -1,5 +1,6 @@
 class Shift < ApplicationRecord
   belongs_to :user
+  has_many :briquettes
 
   validates :date, presence: true
   validates :shift_number, presence: true, inclusion: { in: 1..3 }

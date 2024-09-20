@@ -1,7 +1,7 @@
 class ShiftsController < ApplicationController
   before_action :authorize_admin
-  # before_action :set_user
   before_action :set_shift, only: %i[show edit update destroy]
+  before_save :create_briquettes
 
   def index
     @shifts = Shift.order(updated_at: :asc)
@@ -54,5 +54,12 @@ class ShiftsController < ApplicationController
 
   def authorize_admin
     redirect_to root_path, alert: "Access denied!" unless current_user&.profile&.admin?
+  end
+
+  # create 8 briquettes for each shift
+  def create_briquettes
+   8.times do
+   Briquette.create(shift_id: @shift)
+   end
   end
 end
