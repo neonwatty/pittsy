@@ -1,6 +1,63 @@
 <%= render 'shared/nav' %>
 <div class="hero bg-base-200 p-12">
   <div class="hero-content text-center">
-    <h1> New shift </h1>
+    <%= form_with model: [@user, @shift] do |form| %>
+      <% if @shift.errors.any? %>
+        <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-lg">
+          <h2><%= pluralize(@shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
+          <ul>
+            <% @shift.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="field flex flex-col pt-5">
+        <h1 class="text-3xl"> Create new shift </h1>
+      </div>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :date, "date", class: "block text-sm font-medium mb-1" %>
+        <%= form.date_field :date, class: "user-profile-input-field" %>
+      </div>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :shift_number, "shift_number", class: "block text-sm font-medium mb-1" %>
+        <div class="flex justify-center w-full text-black">
+          <%= form.select :shift_number, 
+                   options_for_select([[1, 1], 
+                                       [2, 2],
+                                       [3, 3]], 
+                                      'shift_number')%>
+        </div>
+      </div>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :job_type, "job_type", class: "block text-sm font-medium mb-1" %>
+        <div class="flex justify-center w-full text-black">
+          <%= form.select :job_type, 
+                   options_for_select([['briquette', 'briqu'],
+                                       ['dryer', 'dryer']], 
+                                      'job_type')%>
+        </div>
+      </div>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :status, "status", class: "block text-sm font-medium mb-1" %>
+        <div class="flex justify-center w-full text-black">
+          <%= form.select :status, 
+                   options_for_select([['unassigned', 'unassigned'], 
+                                       ['scheduled', 'scheduled'], 
+                                       ['completed', 'completed']], 
+                                      'status')%>
+        </div>
+      </div>
+      <div class="field flex flex-col pt-5">
+        <%= form.label :notes, "notes", class: "block text-sm font-medium mb-1" %>
+        <%= form.text_area :notes, class: "user-profile-input-field" %>
+      </div>
+      <div class="grid grid-cols-4 gap-4 pt-8">
+        <%= form.submit 'Submit', class: "btn btn-primary" %>
+        <p></p>
+        <p></p>
+        <%= link_to 'Back', shifts_path, class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
   </div>
 </div>
