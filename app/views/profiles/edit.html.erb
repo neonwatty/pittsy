@@ -23,38 +23,44 @@
               </div>
               <div class="field flex flex-col pt-5">
                 <% user_role = @profile.role %>
-                <%= form.label :role, "role", class: "block text-sm font-medium mb-1" %>
-                <%= form.select :role, 
+                <%= form.label :role, class: "block text-sm font-medium mb-1" %>
+                <div class="flex justify-left w-full text-black">
+                  <%= form.select :role, 
                    options_for_select([['admin', 'admin'], 
                                        ['employee', 'employee']], 
                                       user_role), 
                     {class: "user-profile-input-field"}
                 %>
+                </div>
               </div>
               <div class="field flex flex-col pt-5">
                 <% user_status = @profile.status %>
                 <%= form.label :status, "status", class: "block text-sm font-medium mb-1" %>
-                <%= form.select :status, 
+                <div class="flex justify-left w-full text-black">
+                  <%= form.select :status, 
                    options_for_select([['active', 'active'], 
                                        ['inactive', 'inactive']], 
                                       user_status), 
                    {class: "user-profile-input-field"} %>
+                </div>
               </div>
               <div class="field flex flex-col pt-5">
                 <% notes=@profile.notes %>
                 <%= form.label :notes, "notes", class: "block text-sm font-medium mb-1" %>
-                <%= form.text_area :notes, value: notes, class:  "user-profile-input-field" %>
+                <div class="flex justify-center w-full text-black">
+                  <%= form.text_area :notes, value: notes, class:  "user-profile-input-field" %>
+                </div>
               </div>
             </div>
-            <div class="actions flex pt-5">
-              <%= form.submit "Update", class: "btn btn-primary"%>
+            <div class="flex gap-5 pt-5">
+              <div class="flex gap-5 pt-6">
+                <%= form.submit 'Update', class: "btn btn-primary" %>
+                <%= link_to 'Back', user_profile_path(@user, @profile), class: 'btn btn-secondary' %>
+              </div>
             </div>
           <% end %>
         </div>
       </div>
-    </div>
-    <div class="flex gap-4 mt-4 justify-center">
-      <%= link_to 'Back', user_profile_path(@user, @profile), class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
     </div>
   </div>
 </div>

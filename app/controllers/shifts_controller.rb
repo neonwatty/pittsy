@@ -37,7 +37,7 @@ class ShiftsController < ApplicationController
   end
 
   def index
-    @shifts = Shift.order(updated_at: :asc)
+    @shifts = Shift.order(updated_at: :desc)
     @pagy, @shifts = pagy(@shifts)
   end
 

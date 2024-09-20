@@ -1,12 +1,11 @@
 <%= render 'shared/nav' %>
 <div class="hero bg-base-200">
   <div class="flex-col gap-x-5 gap-y-10 p-10">
-    # print the shift details
     <div class="card bg-base-100 shadow-xl w-96 p-5" id="shift_details_<%= @shift.id %>">
       <div class="card bg-base-150 flex-row ga justify-center">
         <div class="p-5 flex flex-col">
           <div class="flex flex-col justify-center content-center">
-            <h1 class="text-lg p-3"> Shift for shift id <%= @shift.id %></h1>
+            <h1 class="text-lg p-3"> Shift details for id <%= @shift.id %></h1>
           </div>
           <div class="flex flex-col gap-4 pt-5">
             <div> shift user: <%= @shift.user.profile.full_name %> </div>
