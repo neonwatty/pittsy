@@ -36,6 +36,11 @@ class ProfilesController < ApplicationController
     redirect_to users_path, notice: "Profile was successfully destroyed."
   end
 
+  def index
+    @profiles = Profile.order(updated_at: :desc)
+    @pagy, @profiles = pagy(@profiles)
+  end
+
   private
 
   def set_user

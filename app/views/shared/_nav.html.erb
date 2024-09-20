@@ -1,7 +1,7 @@
 <div class="navbar bg-base-100" id="navbar">
 <%= link_to 'pittsy', root_path, class: 'text-xl pb-3 text-gray-800 hover:text-blue-600' %>
 <% if current_user&.profile&.admin? %>
-  <span class="text-xs text-gray-600">admin</span>
+  <span class="text-xs text-gray-600 pr-5">admin</span>
 <% end %>
 <div class="flex-none">
   <ul class="menu menu-horizontal px-1">
@@ -14,7 +14,7 @@
           <%= link_to "User", edit_user_registration_path, class: current_page?(edit_user_registration_path) ? "link link-hover text-blue-600 bg-blue-100 text-sm" : "link link-hover text-sm" %>
         </li>
         <li>
-          <%= link_to "Profiles", users_path, class: current_page?(users_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
+          <%= link_to "Profiles", profiles_path, class: current_page?(profiles_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>
         </li>
         <li>
           <%= link_to "Shifts", shifts_path, class: current_page?(shifts_path) ? "link link-hover text-blue-600 bg-blue-100" : "link link-hover" %>

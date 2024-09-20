@@ -1,7 +1,7 @@
 <%= render 'shared/nav' %>
 <div class="hero bg-base-200">
   <div class="hero-content flex-col gap-10 p-10">
-    <% if @users.present? %>
+    <% if @profiles.present? %>
       <div class="bg-base-300 rounded-b-box rounded-se-box relative overflow-x-auto" id="outer_index_div" >
         <div class="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-7xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 [border-width:var(--tab-border)]">
           <div class="flex flex-col">
@@ -10,7 +10,7 @@
                 <thead>
                   <tr>
                     <th><label><input type="checkbox" class="checkbox hidden" disabled></label></th>
-                    <th>User</th>
+                    <th>Profile</th>
                     <th>Avatar</th>
                     <th>Role</th>
                     <th>Status</th>
@@ -20,8 +20,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% @users.each_with_index do |user, index| %> <!-- Reverse order here -->
-                    <% user_updated_at = user.updated_at %>
+                  <% @profiles.each_with_index do |profile, index| %> <!-- Reverse order here -->
                     <tr>
                       <th>
                         <input type="checkbox" 
@@ -30,14 +29,14 @@
                         disabled>
                       </th>
                       <th>
-                        <div class="text-sm opacity-70"><%= user.profile.full_name %></div>
+                        <div class="text-sm opacity-70"><%= profile.full_name %></div>
                       </th>
                       <td>
                         <div class="flex items-center gap-3">
                           <div class="avatar">
                             <div class="w-12 h-12 mask mask-squircle">
-                              <% if user.profile.avatar.attached? %>
-                                <% user_avatar=user.profile.avatar %>
+                              <% if profile.avatar.attached? %>
+                                <% user_avatar=profile.avatar %>
                                 <a href="<%= rails_blob_path(user_avatar, disposition: "attachment") %>" class="venobox" data-title="user avatar (<%= user_avatar.filename.to_s%>)" data-gall="gal-<%= index %>">
                                   <%= image_tag user_avatar.variant(:thumb) %>
                                 </a>
@@ -47,19 +46,19 @@
                         </div>
                       </td>
                       <td>
-                        <%= render "profiles/role_badge", user: user %>
+                        <%= render "profiles/role_badge", profile: profile %>
                       </td>
                       <td>
-                        <%= render "profiles/status_badge", user: user %>
+                        <%= render "profiles/status_badge", profile: profile %>
                       </td>
                       <td>
-                        <div class="text-sm opacity-100"><%= user.profile.notes %></div>
+                        <div class="text-sm opacity-100"><%= profile.notes %></div>
                       </td>
                       <td>
-                        <div class="text-sm opacity-50"><%= user.updated_at %></div>
+                        <div class="text-sm opacity-50"><%= profile.updated_at %></div>
                       </td>
                       <th>
-                        <%= link_to "Details", user_profile_path(user, user.profile), class: "btn btn-sm btn-primary" %>
+                        <%= link_to "Details", user_profile_path(profile, profile.user), class: "btn btn-sm btn-primary" %>
                       </th>
                     </tr>
                   <% end %>
@@ -67,7 +66,7 @@
                 <tfoot>
                   <tr>
                     <th></th>
-                    <th>Email</th>
+                    <th>Profile</th>
                     <th>Avatar</th>
                     <th>Role</th>
                     <th>Status</th>

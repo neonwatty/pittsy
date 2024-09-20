@@ -10,12 +10,15 @@ Rails.application.routes.draw do
     }
 
   # Route for viewing all users
-  resources :users, only: [ :index ] do
+  resources :users, only: [] do
     # Nested resource for profiles under users
     resources :profiles, only: [ :new, :show, :edit, :update ]
     # Nested resource for shifts under users
     resources :shifts, only: [ :new, :create, :show, :edit, :update, :destroy ]
   end
+
+  # Route for viewing all profiles
+  resources :profiles, only: [ :index ]
 
   # Route for viewing all shifts
   resources :shifts, only: [ :index ]
@@ -30,9 +33,8 @@ Rails.application.routes.draw do
 
   # admin user routes
   #   # Admin-only routes
-  authenticated :user, ->(u) { u.admin? } do
-    resources :users, only: [ :index ]
-    resources :profiles, only: [ :new, :create, :edit, :update, :show ]
+  authenticated :user, ->(u) { u.profile.admin? } do
+    resources :profiles, only: [ :index, :new, :create, :edit, :update, :show ]
   end
 
   # Catch-all route for non-existent pages, to be used unless assets are being compiled
