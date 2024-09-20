@@ -1,22 +1,22 @@
 class ShiftsController < ApplicationController
   before_action :authorize_admin
-  before_action :set_user
+  # before_action :set_user
   before_action :set_shift, only: %i[show edit update destroy]
 
-
   def index
-    @shifts = Shift.order(created_at: :asc)
+    @shifts = Shift.order(updated_at: :asc)
     @pagy, @shifts = pagy(@shifts)
   end
 
+
   def new
-    @shift = User.build_shift
+    @shift = @user.build_shift
   end
 
   def create
-    @shift = User.build_shift(shift_params)
+    @shift = @user.build_shift(shift_params)
     if @shift.save
-      redirect_to shift_path(@shift), notice: "Shift was successfully created."
+      redirect_to shifts_path, notice: "shift was successfully created."
     else
       render :new
     end
@@ -31,7 +31,7 @@ class ShiftsController < ApplicationController
   def update
     if @shift.update(shift_params)
       puts "shift_params: #{shift_params}"
-      redirect_to shift_path(@shift), notice: "Shift was successfully updated."
+      redirect_to shift_path(@shift), notice: "shift was successfully updated."
     else
       render :edit
     end
@@ -39,20 +39,20 @@ class ShiftsController < ApplicationController
 
   def destroy
     @shift.destroy
-    redirect_to shifts_path, notice: "Profile was successfully destroyed."
+    redirect_to shifts_path, notice: "shift was successfully destroyed."
   end
 
   private
 
-  def set_user
-    @user = User.find(params[:user_id])
-  end
-
   def set_shift
-    @shift = @user.shift
+    @shift = Shift.find(params[:id])
   end
 
   def shift_params
-    params.require(:shift).permit(:date, :shift_number, :job_type, :status, :notes)
+    params.require(:shift).permit(:date, :shift_number, :job_type, :status, :notes, :user_id)
+  end
+
+  def authorize_admin
+    redirect_to root_path, alert: "Access denied!" unless current_user&.profile&.admin?
   end
 end

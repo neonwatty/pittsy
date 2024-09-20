@@ -1,0 +1,26 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200">
+  <div class="flex-col gap-x-5 gap-y-10 p-10">
+    <div class="card bg-base-100 shadow-xl w-96 p-5" id="shift_details_<%= @shift.id %>">
+      <div class="card bg-base-150 flex-row ga justify-center">
+        <div class="p-5 flex flex-col">
+          <h1 class="text-bold pb-5">Edit Shift for <%= @shift.id %></h1>
+          <%= form_with model: [@shift], local: true, html: { multipart: true } do |form| %>
+            <div>
+              <div>
+                <%= form.label :user %>
+                <%= form.collection_select :user_id, User.all, :id, :email, {prompt: "Select a user"}, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="actions flex pt-5">
+              <%= form.submit "Update", class: "btn btn-primary"%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-4 mt-4 justify-center">
+      <%= link_to 'Back', shift_path(@shift), class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+    </div>
+  </div>
+</div>
