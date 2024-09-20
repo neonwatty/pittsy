@@ -1,6 +1,6 @@
 class CreateBriquette < ActiveRecord::Migration[7.2]
   def change
-    create_table :briquette do |t|
+    create_table :briquettes do |t|
       t.belongs_to :shift, null: false, foreign_key: true, index: true
       t.time :measurement_time, null: true, default: nil
       t.integer :briquette_speed, null: true, default: nil
@@ -15,6 +15,8 @@ class CreateBriquette < ActiveRecord::Migration[7.2]
       t.string :bulk_density, null: true, default: nil
       t.string :lime, null: true, default: nil
       t.string :molasses, null: true, default: nil
+      t.string :status, default: "incomplete"
+      t.string :notes, default: ""
       t.timestamps
     end
   end

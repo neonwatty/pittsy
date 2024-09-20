@@ -78,7 +78,7 @@ user = User.find(1)
 shift = Shift.where(date: Date.today, user: user).first_or_initialize
 shift.update!(
   shift_number: 3,
-  job_type: "dryer",
+  job_type: "briqu",
   status: "unassigned",
   notes: "Reminder to self - assign this shift."
 )
@@ -96,7 +96,7 @@ user = User.find(3)
 shift = Shift.where(date: Date.today, user: user).first_or_initialize
 shift.update!(
   shift_number: 2,
-  job_type: "dryer",
+  job_type: "briqu",
   status: "complete",
   notes: "Josh is working the dryer today."
 )

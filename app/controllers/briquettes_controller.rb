@@ -30,6 +30,11 @@ class BriquettesController < ApplicationController
     end
   end
 
+  def index
+    @briquettes = Briquette.order(updated_at: :desc)
+    @pagy, @briquettes = pagy(@briquettes)
+  end
+
   def destroy
     @briquette.destroy
     redirect_to briquettes_path, notice: "Briquette shift was successfully destroyed."
@@ -46,7 +51,7 @@ class BriquettesController < ApplicationController
   end
 
   def briquette_params
-    params.require(:briquette).permit(:shift_id, :measurement_time, :briquette_speed, :bop_or_blast, :dry_material, :wet_bentonite, :pug_mill_one_amp, :water, :tons_per_hour, :briquette_moisture, :pug_mill_two_amp, :bulk_density, :lime, :molasses)
+    params.require(:briquette).permit(:shift_id, :measurement_time, :briquette_speed, :bop_or_blast, :dry_material, :wet_bentonite, :pug_mill_one_amp, :water, :tons_per_hour, :briquette_moisture, :pug_mill_two_amp, :bulk_density, :lime, :molasses, :status, :notes)
   end
 
   def authorize_admin

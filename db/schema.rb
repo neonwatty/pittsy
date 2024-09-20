@@ -43,7 +43,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "briquette", force: :cascade do |t|
+  create_table "briquette_job_assignments", force: :cascade do |t|
+    t.bigint "shift_id"
+    t.integer "scheduled_hours_blast"
+    t.integer "scheduled_hours_bop"
+    t.integer "total_scheduled_hours"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shift_id"], name: "index_briquette_job_assignments_on_shift_id"
+  end
+
+  create_table "briquettes", force: :cascade do |t|
     t.bigint "shift_id", null: false
     t.time "measurement_time"
     t.integer "briquette_speed"
@@ -60,17 +70,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
     t.string "molasses"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["shift_id"], name: "index_briquette_on_shift_id"
-  end
-
-  create_table "briquette_job_assignments", force: :cascade do |t|
-    t.bigint "shift_id"
-    t.integer "scheduled_hours_blast"
-    t.integer "scheduled_hours_bop"
-    t.integer "total_scheduled_hours"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["shift_id"], name: "index_briquette_job_assignments_on_shift_id"
+    t.index ["shift_id"], name: "index_briquettes_on_shift_id"
   end
 
   create_table "dryer_job_assignments", force: :cascade do |t|
@@ -206,7 +206,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_211030) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "briquette", "shifts"
+  add_foreign_key "briquettes", "shifts"
   add_foreign_key "equipment", "users"
   add_foreign_key "inspect_skidsteers", "users"
   add_foreign_key "profiles", "users"

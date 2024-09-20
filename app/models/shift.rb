@@ -1,7 +1,7 @@
 class Shift < ApplicationRecord
   belongs_to :user
-  has_many :briquettes
-  after_commit :create_jobs
+  has_many :briquettes, dependent: :destroy
+  after_create :create_jobs
 
   validates :date, presence: true
   validates :shift_number, presence: true, inclusion: { in: 1..3 }
@@ -9,14 +9,8 @@ class Shift < ApplicationRecord
   validates :status, presence: true, inclusion: { in: %w[unassigned scheduled working complete failed] }
 
   def create_jobs
-    if Briquette.(shift_id).job_type == "briqu"
-      8.times do
-      Briquette.create(shift_id: @shift)
-      end
-    elsif Briquette.(shift_id).job_type == "bop"
-      8.times do
-      Briquette.create(shift_id: @shift)
-      end
+    if job_type == "briqu"
+      8.times { briquettes.create }
     end
   end
 end
