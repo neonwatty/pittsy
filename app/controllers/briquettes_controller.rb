@@ -1,15 +1,16 @@
 class BriquettesController < ApplicationController
+  before_action :authorize_admin
+  before_action :set_shift
   before_action :set_briquette, only: %i[show edit update destroy]
 
   def new
-    @briquette = Briquette.new
+    @briquette = @shift.build_briquette
   end
 
   def create
-    @briquette = Briquette.new(briquette_params)
-
+    @briquette = @shift.build_briquette(briquette_params)
     if @briquette.save
-      redirect_to @briquette, notice: "Briquette dataopint was successfully created."
+      redirect_to shift_briquette_path(@shift, @briquette), notice: "Briquette shift was successfully created."
     else
       render :new
     end
@@ -23,19 +24,32 @@ class BriquettesController < ApplicationController
 
   def update
     if @briquette.update(briquette_params)
-      redirect_to @briquette, notice: "Briquette datapoint was successfully updated."
+      redirect_to shift_briquette_path(@shift, @briquette), notice: "Briquette shift was successfully updated."
     else
       render :edit
     end
   end
 
+  def destroy
+    @briquette.destroy
+    redirect_to shifts_path, notice: "Briquette shift was successfully destroyed."
+  end
+
   private
 
+  def set_shift
+    @shift = Shift.find(params[:shift_id])
+  end
+
   def set_briquette
-    @briquette = Briquette.find(params[:id])
+    @briquette = @shift.briquette
   end
 
   def briquette_params
     params.require(:briquette).permit(:shift_id, :measurement_time, :briquette_speed, :bop_or_blast, :dry_material, :wet_bentonite, :pug_mill_one_amp, :water, :tons_per_hour, :briquette_moisture, :pug_mill_two_amp, :bulk_density, :lime, :molasses)
+  end
+
+  def authorize_admin
+    redirect_to root_path, alert: "Access denied!" unless current_user&.profile&.admin?
   end
 end

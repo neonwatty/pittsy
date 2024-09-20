@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authorize_admin
-  before_action :set_user
+  before_action :set_user, only: %i[new create show edit update destroy]
   before_action :set_profile, only: %i[show edit update destroy]
 
   def new

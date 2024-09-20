@@ -13,13 +13,20 @@ Rails.application.routes.draw do
   resources :users, only: [ :index ] do
     # Nested resource for profiles under users
     resources :profiles, only: [ :new, :show, :edit, :update ]
+    # Nested resource for shifts under users
+    resources :shifts, only: [ :new, :create, :show, :edit, :update, :destroy ]
+  end
+
+  # Route for viewing all shifts
+  resources :shifts, only: [ :index ]
+
+  # Routes for briquettes under shifts
+  resources :shifts, only: [] do
+    resources :briquettes, only: [ :new, :create, :show, :edit, :update, :destroy ]
   end
 
   # Route for creating profiles
   resources :profiles, only: [ :create ]
-
-  # Route for viewing all shifts
-  resources :shifts
 
   # admin user routes
   #   # Admin-only routes

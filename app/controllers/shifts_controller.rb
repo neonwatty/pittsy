@@ -1,13 +1,7 @@
 class ShiftsController < ApplicationController
   before_action :authorize_admin
+  before_action :set_user, only: %i[new create show edit update destroy]
   before_action :set_shift, only: %i[show edit update destroy]
-  before_save :create_briquettes
-
-  def index
-    @shifts = Shift.order(updated_at: :asc)
-    @pagy, @shifts = pagy(@shifts)
-  end
-
 
   def new
     @shift = @user.build_shift
@@ -42,10 +36,18 @@ class ShiftsController < ApplicationController
     redirect_to shifts_path, notice: "shift was successfully destroyed."
   end
 
+  def index
+    @shifts = Shift.order(updated_at: :asc)
+    @pagy, @shifts = pagy(@shifts)
+  end
+
   private
+  def set_user
+    @user = User.find(params[:user_id])
+  end
 
   def set_shift
-    @shift = Shift.find(params[:id])
+    @shift = @user.shift
   end
 
   def shift_params
@@ -54,12 +56,5 @@ class ShiftsController < ApplicationController
 
   def authorize_admin
     redirect_to root_path, alert: "Access denied!" unless current_user&.profile&.admin?
-  end
-
-  # create 8 briquettes for each shift
-  def create_briquettes
-   8.times do
-   Briquette.create(shift_id: @shift)
-   end
   end
 end
