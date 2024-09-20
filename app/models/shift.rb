@@ -9,8 +9,8 @@ class Shift < ApplicationRecord
   validates :status, presence: true, inclusion: { in: %w[unassigned scheduled working complete failed] }
 
   def create_jobs
-    if job_type == "briqu"
-      8.times { briquettes.create }
-    end
+    return unless job_type == "briqu"
+
+    8.times { briquettes.create! }
   end
 end

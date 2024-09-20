@@ -75,7 +75,7 @@ profile.update!(
 
 ### create shifts ####
 user = User.find(1)
-Shift.create!(date: Date.today, user: user, job_type: "brique", shift_number: 3, status: "unassigned", notes: "Reminder to self - assign this shift.")
+Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 1, status: "scheduled", notes: "Rob is working the briqu machine today.")
 
 user = User.find(2)
 Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 1, status: "scheduled", notes: "Ben is working the briqu machine today.")
