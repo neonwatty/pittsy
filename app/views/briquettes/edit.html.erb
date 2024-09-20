@@ -1,0 +1,106 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200">
+  <div class="flex-col gap-x-5 gap-y-10 p-10">
+    <div class="card bg-base-100 shadow-xl w-96 p-5" id="user_details_<%= @shift.id %>">
+      <div class="card bg-base-150 flex-row ga justify-center">
+        <div class="p-5 flex flex-col">
+          <h1 class="text-bold pb-5 text-xl">Edit timesheet for shift id <%= @shift.id %></h1>
+          <%= form_with model: [@shift, @briquette], data: { controller: "date-picker" } do |form| %>
+            <% if @briquette.errors.any? %>
+              <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-lg">
+                <h2><%= pluralize(@shift.errors.count, "error") %> prohibited this shift timesheet from being saved:</h2>
+                <ul>
+                  <% @briquette.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="gap-5 pt-5">
+              <div>
+                <%= form.label :measurement_time, class: "block" %>
+                <%= form.select :measurement_time, (0..23).map { |hour| [format('%02d:00', hour), hour] }, { include_blank: @briquette.measurement_time }, { class: 'block user-profile-input-field' } %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :briquette_speed %>
+                <%= form.text_field :briquette_speed, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :bop_or_blast %>
+                <%= form.text_field :bop_or_blast, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :dry_material %>
+                <%= form.text_field :dry_material, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :wet_bentonite %>
+                <%= form.text_field :wet_bentonite, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :pug_mill_one_amp %>
+                <%= form.text_field :pug_mill_one_amp, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :water %>
+                <%= form.text_field :water, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :tons_per_hour %>
+                <%= form.text_field :tons_per_hour, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :briquette_moisture %>
+                <%= form.text_field :briquette_moisture, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :pug_mill_two_amp %>
+                <%= form.text_field :pug_mill_two_amp, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :bulk_density %>
+                <%= form.text_field :bulk_density, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :lime %>
+                <%= form.text_field :lime, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :molasses %>
+                <%= form.text_field :molasses, class: 'user-profile-input-field' %>
+              </div>
+            </div>
+            <div class="flex gap-4 mt-4 pt-5 justify-center">
+              <%= form.submit 'Update', class: 'btn btn-primary' %>
+              <%= link_to 'Back', shift_briquette_path(@shift, @briquette), class: 'btn btn-secondary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

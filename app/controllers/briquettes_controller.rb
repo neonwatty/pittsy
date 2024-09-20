@@ -1,7 +1,8 @@
 class BriquettesController < ApplicationController
   before_action :authorize_admin
   before_action :set_shift
-  before_action :set_briquette, only: %i[show edit update destroy]
+  before_action :set_single_briquette, only: %i[show edit update destroy]
+  before_action :set_briquettes, only: %i[index]
 
   def new
     @briquette = @shift.briquettes.build
@@ -31,7 +32,7 @@ class BriquettesController < ApplicationController
   end
 
   def index
-    @briquettes = Briquette.order(updated_at: :desc)
+    @briquettes = @briquettes.order(updated_at: :desc)
     @pagy, @briquettes = pagy(@briquettes)
   end
 
@@ -46,8 +47,12 @@ class BriquettesController < ApplicationController
     @shift = Shift.find(params[:shift_id])
   end
 
-  def set_briquette
-    @briquette = @shift.briquette
+  def set_single_briquette
+    @briquette = @shift.briquettes.find_by(id: params[:id])
+  end
+
+  def set_briquettes
+    @briquettes = @shift.briquettes
   end
 
   def briquette_params

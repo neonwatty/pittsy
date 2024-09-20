@@ -30,10 +30,11 @@
                         disabled>
                       </th>
                       <th>
+                        <% Rails.logger.info "HELLO Briquette ID: #{briquette.id}" %>
                         <div class="text-sm opacity-70"><%= briquette.id %></div>
                       </th>
                       <th>
-                        <div class="text-sm opacity-70"><%= briquette.shift.user.full_name %></div>
+                        <div class="text-sm opacity-70"><%= briquette.shift.user.profile.full_name %></div>
                       </th>
                       <td>
                         <div class="text-sm opacity-100"><%= briquette.measurement_time %></div>

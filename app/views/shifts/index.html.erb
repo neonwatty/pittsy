@@ -75,7 +75,8 @@
                         <div class="text-sm opacity-50"><%= shift.updated_at %></div>
                       </td>
                       <th>
-                        <%= link_to "Details", user_shift_path(shift.user, shift), class: "btn btn-sm btn-primary" %>
+                        <%= link_to "Shift Details", user_shift_path(shift.user, shift), class: "btn btn-sm btn-primary" %>
+                        <%= link_to "Timesheet", shift_briquette_path(shift, shift.briquettes), class: "btn btn-sm btn-secondary" %>
                       </th>
                     </tr>
                   <% end %>
