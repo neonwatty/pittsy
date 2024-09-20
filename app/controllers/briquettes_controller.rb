@@ -4,11 +4,11 @@ class BriquettesController < ApplicationController
   before_action :set_briquette, only: %i[show edit update destroy]
 
   def new
-    @briquette = @shift.build_briquette
+    @briquette = @shift.briquettes.build
   end
 
   def create
-    @briquette = @shift.build_briquette(briquette_params)
+    @briquette = @shift.briquettes.build(briquette_params)
     if @briquette.save
       redirect_to shift_briquette_path(@shift, @briquette), notice: "Briquette shift was successfully created."
     else
@@ -32,7 +32,7 @@ class BriquettesController < ApplicationController
 
   def destroy
     @briquette.destroy
-    redirect_to shifts_path, notice: "Briquette shift was successfully destroyed."
+    redirect_to briquettes_path, notice: "Briquette shift was successfully destroyed."
   end
 
   private

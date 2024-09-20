@@ -59,7 +59,7 @@
             </div>
             <div class="flex gap-5 pt-6">
               <%= form.submit 'Submit', class: "btn btn-primary" %>
-              <%= link_to 'Back', shifts_path, class: 'btn btn-secondary' %>
+              <%= link_to 'Back', user_shift_path(@shift.user, @shift), class: 'btn btn-secondary' %>
             </div>
           <% end %>
         </div>

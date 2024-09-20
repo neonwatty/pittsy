@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   # Routes for briquettes under shifts
   resources :shifts, only: [] do
-    resources :briquettes, only: [ :new, :create, :show, :edit, :update, :destroy ]
+    resources :briquettes, only: [ :new, :create, :show, :edit, :update ]
   end
 
   # Route for creating profiles
