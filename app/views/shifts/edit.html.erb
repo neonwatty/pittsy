@@ -1,26 +1,69 @@
 <%= render 'shared/nav' %>
 <div class="hero bg-base-200">
   <div class="flex-col gap-x-5 gap-y-10 p-10">
-    <div class="card bg-base-100 shadow-xl w-96 p-5" id="shift_details_<%= @shift.id %>">
+    <div class="card bg-base-100 shadow-xl w-96 p-5" id="user_details_<%= @shift.id %>">
       <div class="card bg-base-150 flex-row ga justify-center">
         <div class="p-5 flex flex-col">
-          <h1 class="text-bold pb-5">Edit Shift id = <%= @shift.id %></h1>
-          <%= form_with model: [@user, @shift], local: true, html: { multipart: true } do |form| %>
-            <div>
-              <div>
-                <%= form.label :user %>
-                <%= form.collection_select :user_id, User.all, :id, :email, {prompt: "Select a user"}, class: "user-profile-input-field" %>
+          <h1 class="text-bold pb-5">Edit shift id <%= @shift.id %></h1>
+          <%= form_with model: [@user, @shift], data: { controller: "date-picker" } do |form| %>
+            <% if @shift.errors.any? %>
+              <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-lg">
+                <h2><%= pluralize(@shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
+                <ul>
+                  <% @shift.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="pt-5">
+              <%= form.label :user %>
+              <%= form.collection_select :user_id, User.all, :id, :email, { prompt: "Select a user" }, { class: "user-profile-input-field", selected: @shift.user_id } %>
+            </div>
+            <div class="field flex flex-col pt-5">
+              <%= form.label :date, class: "block text-sm font-medium mb-1" %>
+              <%= form.date_field :date, value: @shift.date, class: "user-profile-input-field", data: { date_picker_target: 'input' } %>
+            </div>
+            <div class="field flex flex-col pt-5 justify-left w-full">
+              <%= form.label :shift_number, class: "block text-sm font-medium mb-1" %>
+              <div class="flex justify-left w-full text-black">
+                <%= form.select :shift_number, 
+                   options_for_select([[1, 1], 
+                                       [2, 2],
+                                       [3, 3]], 
+                                       @shift.shift_number)%>
               </div>
             </div>
-            <div class="actions flex pt-5">
-              <%= form.submit "Update", class: "btn btn-primary"%>
+            <div class="field flex flex-col pt-5">
+              <%= form.label :job_type, class: "block text-sm font-medium mb-1" %>
+              <div class="flex justify-left w-full text-black">
+                <%= form.select :job_type, 
+                   options_for_select([['briquette', 'briqu'],
+                                       ['dryer', 'dryer']], 
+                                      @shift.job_type)%>
+              </div>
+            </div>
+            <div class="field flex flex-col pt-5">
+              <%= form.label :status, class: "block text-sm font-medium mb-1" %>
+              <div class="flex justify-left w-full text-black">
+                <%= form.select :status, 
+                   options_for_select([['unassigned', 'unassigned'], 
+                                       ['scheduled', 'scheduled'], 
+                                       ['completed', 'completed']], 
+                                      @shift.status)%>
+              </div>
+            </div>
+            <div class="field flex flex-col pt-5">
+              <%= form.label :notes, class: "block text-sm font-medium mb-1" %>
+              <%= form.text_area :notes, value: @shift.notes, class: "user-profile-input-field" %>
+            </div>
+            <div class="flex gap-5 pt-6">
+              <%= form.submit 'Submit', class: "btn btn-primary" %>
+              <%= link_to 'Back', shifts_path, class: 'btn btn-secondary' %>
             </div>
           <% end %>
         </div>
       </div>
-    </div>
-    <div class="flex gap-4 mt-4 justify-center">
-      <%= link_to 'Back', shifts_path, class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
     </div>
   </div>
 </div>

@@ -24,8 +24,7 @@ class ShiftsController < ApplicationController
 
   def update
     if @shift.update(shift_params)
-      puts "shift_params: #{shift_params}"
-      redirect_to shift_path(@shift), notice: "shift was successfully updated."
+      redirect_to shifts_path, notice: "shift was successfully updated."
     else
       render :edit
     end
