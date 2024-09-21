@@ -7,46 +7,68 @@
           <div class="flex flex-col justify-center content-center">
             <h1 class="text-lg p-3"> Timesheet details for shift id <%= @shift.id %></h1>
           </div>
-          <div class="flex flex-col gap-4 pt-5">
-            <label for="measurement_time">Measurement Time:</label>
-            <%= @briquette.measurement_time.present? ? @briquette.measurement_time : 'None chosen' %>
-          </div>
-          <div class="flex flex-col gap-4 pt-5">
-            <div> briquette_speed: <%= @briquette.briquette_speed || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> bop_or_blast: <%= @briquette.bop_or_blast || 'null'%> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> dry_material: <%= @briquette.dry_material || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> wet_bentonite: <%= @briquette.wet_bentonite || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> pug_mill_one_amp: <%= @briquette.pug_mill_one_amp || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> water: <%= @briquette.water || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> tons_per_hour: <%= @briquette.tons_per_hour || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> briquette_moisture: <%= @briquette.briquette_moisture || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> pug_mill_two_amp: <%= @briquette.pug_mill_two_amp || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> bulk_density: <%= @briquette.bulk_density || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> lime: <%= @briquette.lime || 'null' %> </div>
-          </div>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> molasses: <%= @briquette.molasses || 'null' %> </div>
-          </div>
+          <table class="table w-full border-2 border-inherit">
+            <thead>
+              <tr class="border-b-2 border-inherit">
+                <th class="border-l-2 border-inherit">Datatype</th>
+                <th class="border-l-2 border-inherit">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">Measurement Time</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.measurement_time.present? ? @briquette.measurement_time : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">briquette_speed</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.briquette_speed || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">bop_or_blast</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.bop_or_blast || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">dry_material</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.dry_material || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">wet_bentonite</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.wet_bentonite || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">pug_mill_one_amp</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.pug_mill_one_amp || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">water</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.water || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">tons_per_hour</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.tons_per_hour || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">briquette_moisture</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.briquette_moisture || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">pug_mill_two_amp</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.pug_mill_two_amp || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">bulk_density</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.bulk_density || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">lime</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.lime || 'null' %></td>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">molasses</td>
+                <td class="border-l-2 border-inherit"><%= @briquette.molasses || 'null' %></td>
+              </tr>
+            </tbody>
+          </table>
           <div class="flex gap-4 mt-4 justify-center">
             <%= link_to 'Back', shift_briquettes_path(@shift), class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
             <% if current_user&.profile&.admin? %>

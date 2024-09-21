@@ -6,62 +6,54 @@
         <div class="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-8xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 [border-width:var(--tab-border)]">
           <div class="flex flex-col">
             <div class="overflow-x-auto">
-              <table class="table">
+              <table class="table w-full border-2 border-inherit">
                 <thead>
-                  <tr>
-                    <th><label><input type="checkbox" class="checkbox hidden" disabled></label></th>
-                    <th>Briquette shift id</th>
-                    <th>Shift id </th>
-                    <th>Shift user </th>
-                    <th>Last updated</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                    <th></th>
+                  <tr class="border-b-2 border-inherit">
+                    <th class="border-l-2 border-inherit">Briquette shift id</th>
+                    <th class="border-l-2 border-inherit">Shift id </th>
+                    <th class="border-l-2 border-inherit">Shift user </th>
+                    <th class="border-l-2 border-inherit">Last updated</th>
+                    <th class="border-l-2 border-inherit">Status</th>
+                    <th class="border-l-2 border-inherit">Notes</th>
+                    <th class="border-l-2 border-inherit">Details</th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @briquettes.each_with_index do |briquette, index| %>
-                    <tr>
-                      <th>
-                        <input type="checkbox" 
-                        class="checkbox hidden" 
-                        id="checkbox-<%= index %>"
-                        disabled>
-                      </th>
-                      <th>
+                    <tr class="border-b-2 border-inherit">
+                      <th class="border-l-2 border-inherit">
                         <div class="text-sm opacity-70"><%= briquette.id %></div>
                       </th>
-                      <th>
+                      <th class="border-l-2 border-inherit">
                         <div class="text-sm opacity-70"><%= briquette.shift.id %></div>
                       </th>
-                      <th>
+                      <th class="border-l-2 border-inherit">
                         <div class="text-sm opacity-70"><%= briquette.shift.user.profile.full_name %></div>
                       </th>
-                      <td>
+                      <td class="border-l-2 border-inherit">
                         <div class="text-sm opacity-100"><%= briquette.updated_at %></div>
                       </td>
-                      <td>
+                      <td class="border-l-2 border-inherit">
                         <%= render "briquettes/status_badge", briquette: briquette %>
                       </td>
-                      <td>
+                      <td class="border-l-2 border-inherit">
                         <div class="text-sm opacity-100"><%= briquette.notes %></div>
                       </td>
-                      <th>
+                      <th class="border-l-2 border-inherit">
                         <%= link_to "Details", shift_briquette_path(briquette.shift, briquette), class: "btn btn-sm btn-primary" %>
                       </th>
                     </tr>
                   <% end %>
                 </tbody>
                 <tfoot>
-                  <tr>
-                    <th></th>
-                    <th>Briquette shift id</th>
-                    <th>Shift id </th>
-                    <th>Shift user </th>
-                    <th>Last updated</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                    <th></th>
+                  <tr class="border-b-2 border-inherit">
+                    <th class="border-l-2 border-inherit">Briquette shift id</th>
+                    <th class="border-l-2 border-inherit">Shift id </th>
+                    <th class="border-l-2 border-inherit">Shift user </th>
+                    <th class="border-l-2 border-inherit">Last updated</th>
+                    <th class="border-l-2 border-inherit">Status</th>
+                    <th class="border-l-2 border-inherit">Notes</th>
+                    <th class="border-l-2 border-inherit">Details</th>
                   </tr>
                 </tfoot>
               </table>

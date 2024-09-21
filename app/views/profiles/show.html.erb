@@ -7,32 +7,38 @@
           <div class="flex flex-col justify-center content-center">
             <h1 class="text-lg p-3"> Profile for <%= @profile.full_name %></h1>
           </div>
-          <% if @profile.avatar.attached? %>
-            <% input_file = @profile.avatar %>
-            <% if input_file.representable? %>
-              <div class="grid grid-flow-row justify-center">
-                <a href="<%= rails_blob_path(input_file, disposition: "attachment") %>" class="venobox" data-title="<%= @profile.first_name%> <%= @profile.last_name %>" data-gall="gal-1">
-                  <%= image_tag input_file.representation(resize_to_limit: [200, 200]) %>
-                </a>
-              </div>
-            <% else %>
-              <div class="justify-end">
-                <p>No avatar attached.</p>
+          <table class="table w-full border-2 border-inherit">
+            <tr class="border-b-2 border-inherit">
+              <% if @profile.avatar.attached? %>
+                <% input_file = @profile.avatar %>
+                <% if input_file.representable? %>
+                  <div class="grid grid-flow-row justify-center">
+                    <a href="<%= rails_blob_path(input_file, disposition: "attachment") %>" class="venobox" data-title="<%= @profile.first_name%> <%= @profile.last_name %>" data-gall="gal-1">
+                      <%= image_tag input_file.representation(resize_to_limit: [200, 200]) %>
+                    </a>
+                  </div>
+                <% else %>
+                  <div class="justify-end">
+                    <p>No avatar attached.</p>
+                  </div>
+                <% end %>
+              <% end %>
+            </tr>
+            <tr class="border-b-2 border-inherit pt-4">
+              <div> email: <%= @user.email %> </div>
+            </tr>
+            <% if current_user&.profile&.admin? %>
+              <tr class="border-b-2 border-inherit">
+                <div> role:  <%= render "profiles/role_badge", profile: @profile %> </div>
+              </tr>
+              <tr class="border-b-2 border-inherit">
+                <div> status:  <%= render "profiles/status_badge", profile: @profile %></div>
+              </tr>
+              <div class="flex flex-col gap-4 pt-5">
+                <div> notes: <%= @profile.notes %></div>
               </div>
             <% end %>
-          <% end %>
-          <div class = "flex flex-col gap-4 pt-5">
-            <div> email: <%= @user.email %> </div>
-          </div>
-          <% if current_user&.profile&.admin? %>
-            <div class="flex flex-col gap-4 pt-5">
-              <div> role:  <%= render "profiles/role_badge", profile: @profile %> </div>
-              <div> status:  <%= render "profiles/status_badge", profile: @profile %></div>
-            </div>
-            <div class="flex flex-col gap-4 pt-5">
-              <div> notes: <%= @profile.notes %></div>
-            </div>
-          <% end %>
+          </table>
           <div class="flex gap-4 mt-4 justify-center">
             <%= link_to 'Back', profiles_path, class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
             <% if current_user&.profile&.admin? %>
