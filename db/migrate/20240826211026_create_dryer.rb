@@ -1,6 +1,6 @@
-class CreateDryerTimesheets < ActiveRecord::Migration[7.2]
+class CreateDryer < ActiveRecord::Migration[7.2]
   def change
-    create_table :dryer_timesheets do |t|
+    create_table :dryers do |t|
       t.belongs_to :shift, null: false, foreign_key: true, index: true
       t.time :measurement_time
       t.decimal :material_rate_bin_a

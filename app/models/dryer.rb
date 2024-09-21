@@ -23,11 +23,11 @@ class Briquette < ApplicationRecord
     ]
 
     if attributes_to_check.any? { |attr| send(attr).blank? }
-      # If any attribute is blank, check the time since creation
-      if updated_at - created_at > 5.seconds
-        self.status = "active"
+      present_count = attributes_to_check.count { |attr| send(attr).present? }
+      if present_count > 0
+          self.status = "active"
       else
-        self.status = "inactive"
+          self.status = "inactive"
       end
     else
       # If all attributes are present

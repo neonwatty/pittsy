@@ -12,7 +12,7 @@ class Shift < ApplicationRecord
     return unless job_type == "briqu" or job_type == "dryer"
 
     if job_type == "briqu"
-    8.times { briquettes.create! }
+      8.times { briquettes.create! }
     elsif job_type == "dryer"
       8.times { dryers.create! }
     end
