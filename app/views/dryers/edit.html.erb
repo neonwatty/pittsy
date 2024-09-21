@@ -87,13 +87,12 @@
               <%= form.text_field :status, class: 'user-profile-input-field' %>
             </div>
           </div>
-          <div class="flex gap-4 mt-4 pt-5 justify-center">
-            <%= form.submit 'Update', class: 'btn btn-primary' %>
-            <%= link_to 'Back', shift_dryer_path(@shift, @dryer), class: 'btn btn-secondary' %>
-          </div>
-        <% end %>
-      </div>
+        </div>
+        <div class="flex gap-4 mt-4 pt-5 justify-center">
+          <%= form.submit 'Update', class: 'btn btn-primary' %>
+          <%= link_to 'Back', shift_dryer_path(@shift, @dryer), class: 'btn btn-secondary' %>
+        </div>
+      <% end %>
     </div>
   </div>
-</div>
 </div>

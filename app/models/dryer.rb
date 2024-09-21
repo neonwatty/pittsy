@@ -18,7 +18,7 @@ class Dryer < ApplicationRecord
       background_temp
       baghouse_temp
       baghouse_fan_amp
-      material_moirailssture
+      material_moisture
       air_compression
     ]
 

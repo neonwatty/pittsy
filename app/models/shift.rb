@@ -1,6 +1,7 @@
 class Shift < ApplicationRecord
   belongs_to :user
   has_many :briquettes, dependent: :destroy
+  has_many :dryers, dependent: :destroy
   after_create :create_jobs
 
   validates :date, presence: true

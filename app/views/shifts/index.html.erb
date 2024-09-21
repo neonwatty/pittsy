@@ -72,7 +72,11 @@
                           <%= link_to "Shift Details", user_shift_path(shift.user, shift), class: "btn btn-sm btn-primary" %>
                         </div>
                         <div class="p-1">
-                          <%= link_to "Timesheet", shift_briquettes_path(shift, shift.briquettes), class: "btn btn-sm btn-secondary" %>
+                          <% if shift.job_type == "briqu" %>
+                            <%= link_to "Timesheet", shift_briquettes_path(shift, shift.briquettes), class: "btn btn-sm btn-secondary" %>
+                          <% elsif shift.job_type == "dryer" %>
+                            <%= link_to "Timesheet", shift_dryers_path(shift, shift.dryers), class: "btn btn-sm btn-secondary" %>
+                          <% end %>
                         </div>
                       </th>
                     </tr>

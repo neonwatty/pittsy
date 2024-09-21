@@ -61,6 +61,9 @@
           </div>
         </div>
       </div>
+      <div class="flex gap-4 mt-4 justify-center">
+        <%= link_to 'Back', shifts_path, class: 'btn btn-secondary' %>
+      </div>
       <div class="pagy-nav flex my-5 mb-5 justify-center center-content">
         <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
       </div>
