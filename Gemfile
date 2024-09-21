@@ -74,3 +74,6 @@ gem "pg_search"
 gem "pagy", "~> 9.0"
 
 gem "letter_opener", group: :development
+
+gem "wicked_pdf"
+gem "wkhtmltopdf-binary"
