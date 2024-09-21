@@ -4,6 +4,22 @@ class BriquettesController < ApplicationController
   before_action :set_single_briquette, only: %i[show edit update destroy]
   before_action :set_briquettes, only: %i[index]
 
+  def index
+    @pagy, @briquettes = pagy(@briquettes)
+  end
+
+  def download_pdf
+    @briquettes = @shift.briquettes
+    respond_to do |format|
+      format.pdf do
+        render pdf: "briquettes", # Name of the generated PDF file
+               template: "briquettes/index.html.erb", # Path to the template
+               layout: "pdf.html", # Optional layout for PDF
+               disposition: "attachment" # This makes it download as an attachment
+      end
+    end
+  end
+
   def new
     @briquette = @shift.briquettes.build
   end
@@ -33,11 +49,6 @@ class BriquettesController < ApplicationController
       flash[:alert] = "Failure: Briquette shift was not successfully updated. Errors: #{ @briquette.errors.full_messages.join(', ') }"
       redirect_to shift_briquette_path(@shift, @briquette)
     end
-  end
-
-  def index
-    @briquettes = @briquettes
-    @pagy, @briquettes = pagy(@briquettes)
   end
 
   def destroy

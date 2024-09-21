@@ -29,6 +29,13 @@ Rails.application.routes.draw do
     resources :dryers, only: [ :index, :show, :edit, :update ]
   end
 
+  resources :briquettes do
+    collection do
+      get :download_pdf
+    end
+  end
+
+
   # Route for creating profiles
   resources :profiles, only: [ :create ]
 
