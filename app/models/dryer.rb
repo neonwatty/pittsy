@@ -1,4 +1,4 @@
-class Briquette < ApplicationRecord
+class Dryer < ApplicationRecord
   belongs_to :shift
 
   validates :status, presence: true, inclusion: { in: %w[inactive active complete] }
@@ -18,7 +18,7 @@ class Briquette < ApplicationRecord
       background_temp
       baghouse_temp
       baghouse_fan_amp
-      material_moisture
+      material_moirailssture
       air_compression
     ]
 
