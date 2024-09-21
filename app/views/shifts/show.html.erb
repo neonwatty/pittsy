@@ -34,8 +34,11 @@
             </tbody>
           </table>
           <div class="flex gap-4 mt-4 justify-center">
-            <%= link_to 'Back', shifts_path, class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+            <% if current_user&.profile&.employee? %>
+              <%= link_to 'Back', shifts_index_user_path(@user), class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+            <% end %>
             <% if current_user&.profile&.admin? %>
+              <%= link_to 'Back', shifts_path, class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
               <%= link_to "Edit Shift" , edit_user_shift_path(@user, @shift), class: 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500' %>
             <% end%>
           </div>

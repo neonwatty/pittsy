@@ -1,5 +1,5 @@
 class DryersController < ApplicationController
-  before_action :authorize_admin
+  before_action :authorize_admin, except: %i[index show update edit]
   before_action :set_shift
   before_action :set_single_dryer, only: %i[show edit update destroy]
   before_action :set_dryers, only: %i[index]

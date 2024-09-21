@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   # Route for viewing all shifts
   resources :shifts, only: [ :index ]
 
+  # Route for index_user shifts
+  get "shifts/index_user", to: "shifts#index_user"
+
   # Routes for briquettes under shifts
   resources :shifts, only: [ :show ] do
     resources :briquettes, only: [ :index, :show, :edit, :update ]

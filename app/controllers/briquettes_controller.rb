@@ -1,23 +1,11 @@
 class BriquettesController < ApplicationController
-  before_action :authorize_admin
+  before_action :authorize_admin, except: %i[index show update edit]
   before_action :set_shift
   before_action :set_single_briquette, only: %i[show edit update destroy]
   before_action :set_briquettes, only: %i[index]
 
   def index
     @pagy, @briquettes = pagy(@briquettes)
-  end
-
-  def download_pdf
-    @briquettes = @shift.briquettes
-    respond_to do |format|
-      format.pdf do
-        render pdf: "briquettes", # Name of the generated PDF file
-               template: "briquettes/pdf.html.erb", # Path to the template
-               layout: "pdf.html", # Optional layout for PDF
-               disposition: "attachment" # This makes it download as an attachment
-      end
-    end
   end
 
   def new

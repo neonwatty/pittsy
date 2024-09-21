@@ -1,0 +1,96 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200">
+  <% if @shifts.present? %>
+    <div class="bg-base-300 rounded-b-box rounded-se-box relative overflow-x-auto" id="outer_index_div" >
+      <div class="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-8xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 [border-width:var(--tab-border)]">
+        <div class="flex flex-col">
+          <div class="overflow-x-auto">
+            <table class="table w-full border-2 border-inherit">
+              <thead>
+                <tr class="border-b-2 border-inherit">
+                  <th class="border-l-2 border-inherit">Shift id</th>
+                  <th class="border-l-2 border-inherit">Shift number</th>
+                  <th class="border-l-2 border-inherit">Shift user</th>
+                  <th class="border-l-2 border-inherit">Job type</th>
+                  <th class="border-l-2 border-inherit">Status</th>
+                  <th class="border-l-2 border-inherit">Notes</th>
+                  <th class="border-l-2 border-inherit">Updated At</th>
+                  <th class="border-l-2 border-inherit">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @shifts.each_with_index do |shift, index| %>
+                  <tr class="border-b-2 border-inherit">
+                    <th class="border-l-2 border-inherit">
+                      <div class="text-sm opacity-70"><%= shift.id %></div>
+                    </th>
+                    <th class="border-l-2 border-inherit">
+                      <div class="text-sm opacity-70"><%= shift.shift_number %></div>
+                    </th>
+                    <td class="border-l-2 border-inherit">
+                      <div class="flex items-center gap-3">
+                        <div class="avatar">
+                          <div class="w-12 h-12 mask mask-squircle">
+                            <% if shift.user.profile.avatar.attached? %>
+                              <% user_avatar=shift.user.profile.avatar %>
+                              <a href="<%= rails_blob_path(user_avatar, disposition: "attachment") %>" class="venobox" data-title="user avatar (<%= user_avatar.filename.to_s%>)" data-gall="gal-<%= index %>">
+                                <%= image_tag user_avatar.variant(:thumb) %>
+                              </a>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-sm opacity-100"><%= shift.user.profile.full_name %></div>
+                    </td>
+                    <td class="border-l-2 border-inherit">
+                      <%= render "shifts/job_type_badge", shift: shift %>
+                    </td>
+                    <td class="border-l-2 border-inherit">
+                      <%= render "shifts/status_badge", shift: shift %>
+                    </td>
+                    <td class="border-l-2 border-inherit">
+                      <div class="text-sm opacity-100"><%= shift.notes %></div>
+                    </td>
+                    <td class="border-l-2 border-inherit">
+                      <div class="text-sm opacity-50"><%= shift.updated_at %></div>
+                    </td>
+                    <th class="border-l-2 border-inherit">
+                      <div class="p-1">
+                        <%= link_to "Shift Details", user_shift_path(shift.user, shift), class: "btn btn-sm btn-primary" %>
+                      </div>
+                      <div class="p-1">
+                        <% if shift.job_type == "briqu" %>
+                          <%= link_to "Timesheet", shift_briquettes_path(shift, shift.briquettes), class: "btn btn-sm btn-secondary" %>
+                        <% elsif shift.job_type == "dryer" %>
+                          <%= link_to "Timesheet", shift_dryers_path(shift, shift.dryers), class: "btn btn-sm btn-secondary" %>
+                        <% end %>
+                      </div>
+                    </th>
+                  </tr>
+                <% end %>
+              </tbody>
+              <tfoot>
+                <tr class="border-b-2 border-inherit">
+                  <th class="border-l-2 border-inherit">Shift id</th>
+                  <th class="border-l-2 border-inherit">Shift number</th>
+                  <th class="border-l-2 border-inherit">Shift user</th>
+                  <th class="border-l-2 border-inherit">Job type</th>
+                  <th class="border-l-2 border-inherit">Status</th>
+                  <th class="border-l-2 border-inherit">Notes</th>
+                  <th class="border-l-2 border-inherit">Updated At</th>
+                  <th class="border-l-2 border-inherit">Detail</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pagy-nav flex my-5 mb-5 justify-center center-content">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
+  </div>
+<% else %>
+  <%= render "shifts/no_shifts" %>
+<% end %>
+</div>

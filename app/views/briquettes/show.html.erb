@@ -71,9 +71,7 @@
           </table>
           <div class="flex gap-4 mt-4 justify-center">
             <%= link_to 'Back', shift_briquettes_path(@shift), class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
-            <% if current_user&.profile&.admin? %>
-              <%= link_to "Edit Briquette" , edit_shift_briquette_path(@shift, @briquette), class: 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500' %>
-            <% end%>
+            <%= link_to "Edit Briquette" , edit_shift_briquette_path(@shift, @briquette), class: 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500' %>
           </div>
         </div>
       </div>

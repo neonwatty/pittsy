@@ -1,5 +1,5 @@
 class ShiftsController < ApplicationController
-  before_action :authorize_admin
+  before_action :authorize_admin, except: %i[index_user show update]
   before_action :set_user, only: %i[new create show edit update destroy]
   before_action :set_shift, only: %i[show edit update destroy]
 
@@ -37,6 +37,12 @@ class ShiftsController < ApplicationController
 
   def index
     @shifts = Shift.order(updated_at: :desc)
+    @pagy, @shifts = pagy(@shifts)
+  end
+
+
+  def index_user
+    @shifts = Shift.where(user_id: current_user.id).order(updated_at: :desc)
     @pagy, @shifts = pagy(@shifts)
   end
 

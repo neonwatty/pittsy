@@ -14,7 +14,6 @@
                     <th class="border-l-2 border-inherit">Shift user </th>
                     <th class="border-l-2 border-inherit">Last updated</th>
                     <th class="border-l-2 border-inherit">Status</th>
-                    <th class="border-l-2 border-inherit">Notes</th>
                     <th class="border-l-2 border-inherit">Details</th>
                   </tr>
                 </thead>
@@ -36,9 +35,6 @@
                       <td class="border-l-2 border-inherit">
                         <%= render "briquettes/status_badge", briquette: briquette %>
                       </td>
-                      <td class="border-l-2 border-inherit">
-                        <div class="text-sm opacity-100"><%= briquette.notes %></div>
-                      </td>
                       <th class="border-l-2 border-inherit">
                         <%= link_to "Details", shift_briquette_path(briquette.shift, briquette), class: "btn btn-sm btn-primary" %>
                       </th>
@@ -52,7 +48,6 @@
                     <th class="border-l-2 border-inherit">Shift user </th>
                     <th class="border-l-2 border-inherit">Last updated</th>
                     <th class="border-l-2 border-inherit">Status</th>
-                    <th class="border-l-2 border-inherit">Notes</th>
                     <th class="border-l-2 border-inherit">Details</th>
                   </tr>
                 </tfoot>
@@ -62,8 +57,12 @@
         </div>
       </div>
       <div class="flex gap-4 mt-4 justify-center">
-        <%= link_to 'Back', shifts_path, class: 'btn btn-secondary' %>
-        <%= link_to 'Download PDF', download_pdf_shift_briquette_path(@briquettes.first.shift, @briquettes.first.id, format: :pdf), class: 'btn btn-primary' %>
+        <% if current_user&.profile&.admin? %>
+          <%= link_to 'Back', shifts_path, class: 'btn btn-secondary' %>
+        <% end %>
+        <% if current_user&.profile&.employee? %>
+          <%= link_to 'Back', shifts_index_user_path(@user), class: 'btn btn-secondary' %>
+        <% end %>
       </div>
       <div class="pagy-nav flex my-5 mb-5 justify-center center-content">
         <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
