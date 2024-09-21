@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   # Routes for briquettes under shifts
   resources :shifts, only: [ :show ] do
     resources :briquettes, only: [ :index, :show, :edit, :update ]
+    resources :dryers, only: [ :index, :show, :edit, :update ]
   end
 
   # Route for creating profiles

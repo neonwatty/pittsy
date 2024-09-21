@@ -1,0 +1,19 @@
+<% status_class = briquette.status %>
+<% case status_class %>
+<% when "inactive" %>
+  <div class="badge badge-warning badge-outline">
+    inactive
+  </div>
+<% when "active" %>
+  <div class="badge badge-accent badge-outline">
+    active
+  </div>
+<% when "complete" %>
+  <div class="badge badge-success badge-outline">
+    complete
+  </div>
+<% else %>
+  <div class="badge badge-error">
+    unknown
+  </div>
+<% end %>

@@ -1,0 +1,94 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200">
+  <div class="flex-col gap-x-5 gap-y-10 p-10">
+    <div class="card bg-base-100 shadow-xl w-96 p-5" id="dryer_details_<%= @dryer.id %>">
+      <div class="card bg-base-150 flex-row ga justify-center">
+        <div class="p-5 flex flex-col">
+          <div class="flex flex-col justify-center content-center">
+            <h1 class="text-lg p-3"> Timesheet details for shift id <%= @shift.id %></h1>
+          </div>
+          <table class="table w-full border-2 border-inherit">
+            <thead>
+              <tr class="border-b-2 border-inherit">
+                <th class="border-l-2 border-inherit">Datatype</th>
+                <th class="border-l-2 border-inherit">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">Measurement Time</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.measurement_time.present? ? @dryer.measurement_time : 'None chosen' %></td>
+              </tr>
+              measurement_time
+              material_rate_bin_a
+              cyclone_photo
+              control_setpoint
+              control_temp
+              gas_valve_position
+              background_temp
+              baghouse_temp
+              baghouse_fan_amp
+              material_moisture
+              air_compression
+              <tr class="border-b-2 border-inherit">
+                <td class="border-l-2 border-inherit">Material Rate Bin A</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.material_rate_bin_a.present? ? @dryer.material_rate_bin_a : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2
+              border-inherit">
+                <td class="border-l-2 border-inherit">Cyclone Photo</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.cyclone_photo.present? ? @dryer.cyclone_photo : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2
+              border-inherit">
+                <td class="border-l-2 border-inherit">Control Setpoint</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.control_setpoint.present? ? @dryer.control_setpoint : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2
+              border-inherit">
+                <td class="border-l-2 border-inherit">Control Temp</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.control_temp.present? ? @dryer.control_temp : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2
+              border-inherit">
+                <td class="border-l-2 border-inherit">Gas Valve Position</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.gas_valve_position.present? ? @dryer.gas_valve_position : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2
+              border-inherit">
+                <td class="border-l-2 border-inherit">Background Temp</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.background_temp.present? ? @dryer.background_temp : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2
+              border-inherit">
+                <td class="border-l-2 border-inherit">Baghouse Temp</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.baghouse_temp.present? ? @dryer.baghouse_temp : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2
+              border-inherit">
+                <td class="border-l-2 border-inherit">Baghouse Fan Amp</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.baghouse_fan_amp.present? ? @dryer.baghouse_fan_amp : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2
+              border-inherit">
+                <td class="border-l-2 border-inherit">Material Moisture</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.material_moisture.present? ? @dryer.material_moisture : 'None chosen' %></td>
+              </tr>
+              <tr class="border-b-2
+              border-inherit">
+                <td class="border-l-2 border-inherit">Air Compression</td>
+                <td class="border-l-2 border-inherit"><%= @dryer.air_compression.present? ? @dryer.air_compression : 'None chosen' %></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="flex gap-4 mt-4 justify-center">
+            <%= link_to 'Back', shift_dryers_path(@shift), class:  'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+            <% if current_user&.profile&.admin? %>
+              <%= link_to "Edit dryer" , edit_shift_dryer_path(@shift, @dryer), class: 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500' %>
+            <% end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

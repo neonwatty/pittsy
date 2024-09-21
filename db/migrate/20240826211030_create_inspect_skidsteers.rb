@@ -43,7 +43,6 @@ class CreateInspectSkidsteers < ActiveRecord::Migration[6.0]
       t.string :brakes_comments
       t.integer :backup_alarm
       t.string :backup_alarm_comments
-
       t.timestamps
     end
   end

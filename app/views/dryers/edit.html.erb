@@ -1,0 +1,99 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200">
+  <div class="flex-col gap-x-5 gap-y-10 p-10">
+    <div class="card bg-base-100 shadow-xl w-96 p-5" id="user_details_<%= @shift.id %>">
+      <div class="card bg-base-150 flex-row ga justify-center">
+        <div class="p-5 flex flex-col">
+          <h1 class="text-bold pb-5 text-xl">Edit timesheet for shift id <%= @shift.id %></h1>
+          <%= form_with model: [@shift, @dryer] do |form| %>
+            <% if @dryer.errors.any? %>
+              <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-lg">
+                <h2><%= pluralize(@shift.errors.count, "error") %> prohibited this shift timesheet from being saved:</h2>
+                <ul>
+                  <% @dryer.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="gap-5 pt-5">
+              <div>
+                <%= form.label :measurement_time, class: "block" %>
+                <%= form.select :measurement_time, (0..23).map { |hour| [format('%02d:00', hour), hour] }, { include_blank: @dryer.measurement_time }, { class: 'block user-profile-input-field' } %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :material_rate_bin_a %>
+                <%= form.text_field :material_rate_bin_a, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :cyclone_photo %>
+                <%= form.text_field :cyclone_photo, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :control_setpoint %>
+                <%= form.text_field :control_setpoint, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :control_temp %>
+                <%= form.text_field :control_temp, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :gas_valve_position %>
+                <%= form.text_field :gas_valve_position, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :background_temp %>
+                <%= form.text_field :background_temp, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :baghouse_temp %>
+                <%= form.text_field :baghouse_temp, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :baghouse_fan_amp %>
+                <%= form.text_field :baghouse_fan_amp, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :material_moisture %>
+                <%= form.text_field :material_moisture, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 pt-5">
+              <div>
+                <%= form.label :air_compression %>
+                <%= form.text_field :air_compression, class: "user-profile-input-field" %>
+              </div>
+            </div>
+            <div class="hidden">
+              <%= form.label :status %>
+              <%= form.text_field :status, class: 'user-profile-input-field' %>
+            </div>
+          </div>
+          <div class="flex gap-4 mt-4 pt-5 justify-center">
+            <%= form.submit 'Update', class: 'btn btn-primary' %>
+            <%= link_to 'Back', shift_dryer_path(@shift, @dryer), class: 'btn btn-secondary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

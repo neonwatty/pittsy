@@ -1,0 +1,71 @@
+<%= render 'shared/nav' %>
+<div class="hero bg-base-200">
+  <div class="hero-content flex-col gap-10 p-10">
+    <% if @dryers.present? %>
+      <div class="bg-base-300 rounded-b-box rounded-se-box relative overflow-x-auto" id="outer_index_div" >
+        <div class="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-8xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 [border-width:var(--tab-border)]">
+          <div class="flex flex-col">
+            <div class="overflow-x-auto">
+              <table class="table w-full border-2 border-inherit">
+                <thead>
+                  <tr class="border-b-2 border-inherit">
+                    <th class="border-l-2 border-inherit">dryer shift id</th>
+                    <th class="border-l-2 border-inherit">Shift id </th>
+                    <th class="border-l-2 border-inherit">Shift user </th>
+                    <th class="border-l-2 border-inherit">Last updated</th>
+                    <th class="border-l-2 border-inherit">Status</th>
+                    <th class="border-l-2 border-inherit">Notes</th>
+                    <th class="border-l-2 border-inherit">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @dryers.each_with_index do |dryer, index| %>
+                    <tr class="border-b-2 border-inherit">
+                      <th class="border-l-2 border-inherit">
+                        <div class="text-sm opacity-70"><%= dryer.id %></div>
+                      </th>
+                      <th class="border-l-2 border-inherit">
+                        <div class="text-sm opacity-70"><%= dryer.shift.id %></div>
+                      </th>
+                      <th class="border-l-2 border-inherit">
+                        <div class="text-sm opacity-70"><%= dryer.shift.user.profile.full_name %></div>
+                      </th>
+                      <td class="border-l-2 border-inherit">
+                        <div class="text-sm opacity-100"><%= dryer.updated_at %></div>
+                      </td>
+                      <td class="border-l-2 border-inherit">
+                        <%= render "dryers/status_badge", dryer: dryer %>
+                      </td>
+                      <td class="border-l-2 border-inherit">
+                        <div class="text-sm opacity-100"><%= dryer.notes %></div>
+                      </td>
+                      <th class="border-l-2 border-inherit">
+                        <%= link_to "Details", shift_dryer_path(dryer.shift, dryer), class: "btn btn-sm btn-primary" %>
+                      </th>
+                    </tr>
+                  <% end %>
+                </tbody>
+                <tfoot>
+                  <tr class="border-b-2 border-inherit">
+                    <th class="border-l-2 border-inherit">dryer shift id</th>
+                    <th class="border-l-2 border-inherit">Shift id </th>
+                    <th class="border-l-2 border-inherit">Shift user </th>
+                    <th class="border-l-2 border-inherit">Last updated</th>
+                    <th class="border-l-2 border-inherit">Status</th>
+                    <th class="border-l-2 border-inherit">Notes</th>
+                    <th class="border-l-2 border-inherit">Details</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pagy-nav flex my-5 mb-5 justify-center center-content">
+        <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+      </div>
+    </div>
+  <% else %>
+    <%= render "dryers/no_dryers" %>
+  <% end %>
+</div>
