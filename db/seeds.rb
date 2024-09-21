@@ -75,15 +75,19 @@ profile.update!(
 
 ### create shifts ####
 user = User.find(1)
-Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 1, status: "scheduled", notes: "Rob is working the briqu machine today.")
+Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 1, status: "unassigned", notes: "Rob is working the briqu machine today.")
+
+user = User.find(1)
+Shift.create!(date: Date.today, user: user, job_type: "dryer", shift_number: 1, status: "unassigned", notes: "Rob assign the dryer shift.")
 
 user = User.find(2)
 Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 1, status: "scheduled", notes: "Ben is working the briqu machine today.")
 
 user = User.find(3)
-Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 2, status: "complete", notes: "Josh is working the dryer today.")
+Shift.create!(date: Date.today, user: user, job_type: "dryer", shift_number: 2, status: "scheduled", notes: "Josh is working the dryer today.")
 
 user = User.find(4)
-Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 3, status: "working", notes: "Bob is working the briqu machine today.")
+Shift.create!(date: Date.today, user: user, job_type: "briqu", shift_number: 3, status: "scheduled", notes: "Bob is working the briqu machine today.")
+
 
 puts "Seeds finished."
