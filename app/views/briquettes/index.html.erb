@@ -63,7 +63,7 @@
       </div>
       <div class="flex gap-4 mt-4 justify-center">
         <%= link_to 'Back', shifts_path, class: 'btn btn-secondary' %>
-        <%= link_to 'Download PDF', download_pdf_briquettes_path(@briquettes.first.shift), format: :pdf, class: 'btn btn-primary' %>
+        <%= link_to 'Download PDF', download_pdf_shift_briquette_path(@briquettes.first.shift, @briquettes.first.id, format: :pdf), class: 'btn btn-primary' %>
       </div>
       <div class="pagy-nav flex my-5 mb-5 justify-center center-content">
         <%== pagy_nav(@pagy) if @pagy.pages > 1 %>

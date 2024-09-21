@@ -13,7 +13,7 @@ class BriquettesController < ApplicationController
     respond_to do |format|
       format.pdf do
         render pdf: "briquettes", # Name of the generated PDF file
-               template: "briquettes/index.html.erb", # Path to the template
+               template: "briquettes/pdf.html.erb", # Path to the template
                layout: "pdf.html", # Optional layout for PDF
                disposition: "attachment" # This makes it download as an attachment
       end

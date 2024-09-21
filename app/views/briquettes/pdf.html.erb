@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Briquette Details for Shift <%= @shift.id %></title>
+    <style>
+      /* Custom styles */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Briquette Details for Shift <%= @shift.id %></h1>
+    <h2>Briquette ID: <%= @briquette.id %></h2>
+    <table class="table w-full border-2 border-inherit">
+      <thead>
+        <tr class="border-b-2 border-inherit">
+          <th class="border-l-2 border-inherit">Briquette shift id</th>
+          <th class="border-l-2 border-inherit">Shift id </th>
+          <th class="border-l-2 border-inherit">Shift user </th>
+          <th class="border-l-2 border-inherit">Last updated</th>
+          <th class="border-l-2 border-inherit">Status</th>
+          <th class="border-l-2 border-inherit">Notes</th>
+          <th class="border-l-2 border-inherit">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @briquettes.each_with_index do |briquette, index| %>
+          <tr class="border-b-2 border-inherit">
+            <th class="border-l-2 border-inherit">
+              <div class="text-sm opacity-70"><%= briquette.id %></div>
+            </th>
+            <th class="border-l-2 border-inherit">
+              <div class="text-sm opacity-70"><%= briquette.shift.id %></div>
+            </th>
+            <th class="border-l-2 border-inherit">
+              <div class="text-sm opacity-70"><%= briquette.shift.user.profile.full_name %></div>
+            </th>
+            <td class="border-l-2 border-inherit">
+              <div class="text-sm opacity-100"><%= briquette.updated_at %></div>
+            </td>
+            <td class="border-l-2 border-inherit">
+              <%= render "briquettes/status_badge", briquette: briquette %>
+            </td>
+            <td class="border-l-2 border-inherit">
+              <div class="text-sm opacity-100"><%= briquette.notes %></div>
+            </td>
+            <th class="border-l-2 border-inherit">
+              <%= link_to "Details", shift_briquette_path(briquette.shift, briquette), class: "btn btn-sm btn-primary" %>
+            </th>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr class="border-b-2 border-inherit">
+          <th class="border-l-2 border-inherit">Briquette shift id</th>
+          <th class="border-l-2 border-inherit">Shift id </th>
+          <th class="border-l-2 border-inherit">Shift user </th>
+          <th class="border-l-2 border-inherit">Last updated</th>
+          <th class="border-l-2 border-inherit">Status</th>
+          <th class="border-l-2 border-inherit">Notes</th>
+          <th class="border-l-2 border-inherit">Details</th>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

@@ -27,13 +27,12 @@ Rails.application.routes.draw do
   resources :shifts, only: [ :show ] do
     resources :briquettes, only: [ :index, :show, :edit, :update ]
     resources :dryers, only: [ :index, :show, :edit, :update ]
-  end
-
-  resources :briquettes do
-    collection do
-      get :download_pdf
+    # add a route for the download_pdf
+    resources :briquettes, only: [ :index ] do
+      get "download_pdf", on: :member
     end
   end
+
 
 
   # Route for creating profiles
